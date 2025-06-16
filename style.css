@@ -18,9 +18,13 @@ body{
 #header{
   width: 100%;
   height: 100vh;
-  background-image: url('sudip2.jpeg');
+  background-image: url('bg.jpeg');
   background-size: cover;
   background-position: center;
+}
+ul li{
+   text-decoration: none;
+
 }
 
 .container{
@@ -46,7 +50,7 @@ nav ul li{
 }
 
 nav ul li a{
-  color: #110d0d;
+  color: #fbfeff;
   text-decoration: none;
   font-size: 18px;
   position: relative;
@@ -192,6 +196,30 @@ nav ul li a:hover::after{
   display: block;
 }
 
+#scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ff004f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#scroll-top:hover {
+  background: #e60043;
+}
+
+
 
 .btn{
   display: block;
@@ -260,6 +288,27 @@ form input,form textarea{
   color: #fff;
 }
 
+/* email and phone */
+
+   p {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #dac9c9;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    a i {
+      margin-right: 8px;
+      color: #007bff;
+    }
+
+    a:hover {
+      color: #007bff;
+    }
 
 /*---small screens--*/
 nav .fa-solid{

@@ -24,9 +24,8 @@
         </ul>
         <i class="fa-solid fa-bars" onclick="openmenu()" aria-label="Open Menu"></i>
       </nav>
-
       <div class="header-text">
-        <p>Backend Developer | BCA Student</p>
+        <p>Web Developer | BCA Student</p>
         <h1>Hi, I'm <span>Sudip Bhasima</span><br>from Nepal</h1>
       </div>
     </div>
@@ -45,13 +44,11 @@
             I'm Sudip Bhasima, an enthusiastic IT student deeply passionate about technology and innovation. 
             I strive to make an impact in the tech world through coding, web development, network security, and data analysis.
           </p>
-
           <div class="tab-titles">
             <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
             <p class="tab-links" onclick="opentab('education')">Education</p>
             <p class="tab-links" onclick="opentab('project-tab')">Projects</p>
           </div>
-
           <div class="tab-contents active-tab" id="skills">
             <ul>
               <li>Teamwork</li>
@@ -59,7 +56,6 @@
               <li>Frontend Basics (HTML, CSS, JS)</li>
             </ul>
           </div>
-
           <div class="tab-contents" id="education">
             <ul>
               <li><span>2017</span><br>SEE from Prime Academy</li>
@@ -67,12 +63,11 @@
               <li><span>2025 (Expected)</span><br>BCA from Milton International College</li>
             </ul>
           </div>
-
           <div class="tab-contents" id="project-tab">
             <ul>
               <li><span>Blood Bank Management System</span><br>Manage blood donations using PHP, MySQL, and JavaScript.</li>
               <li><span>Portfolio Website</span><br>Responsive personal portfolio built with HTML, CSS, and JS.</li>
-              <li><span>Bookstore Website (Book Bazaar)</span><br>E-commerce platform for book sales using PHP.</li>
+              <li><span>Online Pharmacy Management</span><br>Medicine ordering and user portal system built with PHP and MySQL.</li>
             </ul>
           </div>
         </div>
@@ -81,33 +76,28 @@
   </section>
 
   <!-- Projects Section -->
-<section id="projects" class="project-section">
-  <div class="container">
-    <h2 class="project-title">My Projects</h2>
-    <div class="project-grid">
-      
-      <div class="project-card">
-        <h3>Blood Bank Management</h3>
-        <p><strong>Description:</strong> Manage donations, requests & blood stock. Built with PHP & MySQL.</p>
-        <p><strong>Link:</strong> <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank">View Project</a></p>
+  <section id="projects" class="project-section">
+    <div class="container">
+      <h2 class="project-title">My Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Blood Bank Management</h3>
+          <p><strong>Description:</strong> Manage donations, requests & blood stock. Built with PHP & MySQL.</p>
+          <p><strong>Link:</strong> <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank">View Project</a></p>
+        </div>
+        <div class="project-card">
+          <h3>Portfolio Website</h3>
+          <p><strong>Description:</strong> Responsive personal portfolio built with HTML, CSS & JavaScript.</p>
+          <p><strong>Link:</strong> <a href="https://github.com/yourusername/portfolio-website" target="_blank">View Project</a></p>
+        </div>
+        <div class="project-card">
+          <h3>Online Pharmacy</h3>
+          <p><strong>Description:</strong> Online pharmacy with user panel & admin control. Built with PHP.</p>
+          <p><strong>Link:</strong> <a href="https://github.com/yourusername/online-pharmacy" target="_blank">View Project</a></p>
+        </div>
       </div>
-
-      <div class="project-card">
-        <h3>Portfolio Website</h3>
-        <p><strong>Description:</strong> Responsive personal portfolio built with HTML, CSS & JavaScript.</p>
-        <p><strong>Link:</strong> <a href="https://github.com/yourusername/portfolio-website" target="_blank">View Project</a></p>
-      </div>
-
-      <div class="project-card">
-        <h3>Book Bazaar (E-commerce)</h3>
-        <p><strong>Description:</strong> Online book store with cart & admin panel. Built with PHP.</p>
-        <p><strong>Link:</strong> <a href="https://github.com/yourusername/book-bazaar-ecommerce" target="_blank">View Project</a></p>
-      </div>
-
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Contact Section -->
   <section id="contact">
@@ -115,30 +105,26 @@
       <div class="row">
         <div class="contact-left">
           <h1 class="sub-title">Contact Me</h1>
-          <p><i class="fa-solid fa-paper-plane"></i> bhasimasudip05@gmail.com</p>
-          <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
+          <p><a href="mailto:bhasimasudip05@gmail.com"><i class="fa-solid fa-paper-plane"></i> bhasimasudip05@gmail.com</a></p>
+          <p><a href="tel:+9779866443370"><i class="fa-solid fa-phone"></i> +977 9866443370</a></p>
           <div class="social-icons">
-            <a href="https://www.facebook.com/yourprofile" aria-label="Facebook Profile"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/yourprofile" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/yourprofile" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/TheKing.Sudip/"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/yourprofile"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://np.linkedin.com/in/sudip-bhasima-47183b305"><i class="fa-brands fa-linkedin"></i></a>
           </div>
-          <a href="sudip_cv.pdf" download class="btn btn2" aria-label="Download CV">Download CV</a>
+          <a href="Resume.pdf" download class="btn btn2">Download CV</a>
         </div>
-
         <div class="contact-right">
-          <form action="sudip.php" method="post" aria-labelledby="contact-form">
+          <form action="sudip.php" method="post">
             <label for="name">Full Name:</label>
-            <input type="text" name="name" placeholder="Your Name" required aria-required="true">
-
+            <input type="text" name="name" placeholder="Your Name" required>
             <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="Your Email" required aria-required="true">
-
+            <input type="email" name="email" placeholder="Your Email" required>
             <label for="phone">Phone:</label>
-            <input type="tel" name="phone" placeholder="Phone Number" required aria-required="true">
-
+            <input type="tel" name="phone" placeholder="Phone Number" required>
             <label for="message">Message:</label>
-            <textarea name="message" rows="6" placeholder="Your Message" aria-label="Your Message"></textarea>
-
+            <textarea name="message" rows="6" placeholder="Your Message"></textarea>
+            <b>It's not working for now, please contact via email, SMS, call, or Facebook.</b>
             <input type="submit" name="submit" class="btn btn2" value="Send Message">
           </form>
         </div>
@@ -146,72 +132,13 @@
     </div>
   </section>
 
-  <!-- JavaScript -->
-  <script>
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
+<!-- Scroll to Top Button -->
+<button id="scroll-top" onclick="scrollToTop()" aria-label="Scroll to Top" style="display: none;">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
 
-    function opentab(tabname) {
-      for (let tablink of tablinks) {
-        tablink.classList.remove("active-link");
-      }
-      for (let tabcontent of tabcontents) {
-        tabcontent.classList.remove("active-tab");
-      }
-      event.currentTarget.classList.add("active-link");
-      document.getElementById(tabname).classList.add("active-tab");
-    }
+  </button>
 
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu() {
-      sidemenu.style.right = "0";
-    }
-    function closemenu() {
-      sidemenu.style.right = "-200px";
-    }
-  </script>
-
-  <!-- Scroll to Top Button -->
-<!-- JavaScript -->
-<script>
-  var tablinks = document.getElementsByClassName("tab-links");
-  var tabcontents = document.getElementsByClassName("tab-contents");
-
-  function opentab(tabname) {
-    for (let tablink of tablinks) {
-      tablink.classList.remove("active-link");
-    }
-    for (let tabcontent of tabcontents) {
-      tabcontent.classList.remove("active-tab");
-    }
-    // Fix: Add this to properly get the clicked tab
-    event.currentTarget.classList.add("active-link");
-    document.getElementById(tabname).classList.add("active-tab");
-  }
-
-  var sidemenu = document.getElementById("sidemenu");
-  function openmenu() {
-    sidemenu.style.right = "0";
-  }
-  function closemenu() {
-    sidemenu.style.right = "-200px";
-  }
-
-  // Scroll to Top Script
-  const scrollTopButton = document.getElementById("scroll-top");
-
-  window.onscroll = () => {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      scrollTopButton.style.display = "block";
-    } else {
-      scrollTopButton.style.display = "none";
-    }
-  };
-
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
-    <button id="scroll-top" onclick="scrollToTop()" aria-label="Scroll to Top" style="display: none;">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
+  <script src="script.js"></script>
+</body>
+</html>
