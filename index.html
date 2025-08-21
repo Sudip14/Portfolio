@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Sudip Bhasima's Portfolio | Backend Developer, BCA Student from Nepal. Explore my projects, skills, and contact details." />
+  <meta name="description" content="Sudip Bhasima's Portfolio | Web Developer, BCA Student from Nepal. Explore my projects, skills, and contact details." />
   <title>Sudip Bhasima | Portfolio</title>
   <link rel="stylesheet" href="style.css"/>
   <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous"></script>
@@ -13,19 +13,19 @@
   <!-- Header -->
   <header id="header">
     <div class="container">
-      <nav role="navigation">
-        <h4><img src="sudip3.jpeg" class="logo" alt="Sudip Bhasima "></h4>
+      <nav>
+        <h4><img src="sudip3.jpeg" class="logo" alt="Sudip Bhasima"></h4>
         <ul id="sidemenu">
           <li><a href="#header">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
-          <i class="fa-solid fa-circle-xmark" onclick="closemenu()" aria-label="Close Menu"></i>
+          <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
         </ul>
-        <i class="fa-solid fa-bars" onclick="openmenu()" aria-label="Open Menu"></i>
+        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
       </nav>
       <div class="header-text">
-        <p>Web Developer | BCA Student</p>
+        <p>Frontend & Backend Developer | BCA Student</p>
         <h1>Hi, I'm <span>Sudip Bhasima</span><br>from Nepal</h1>
       </div>
     </div>
@@ -33,115 +33,156 @@
 
   <!-- About Section -->
   <section id="about">
-    <div class="container">
-      <div class="row">
-        <div class="about-col-1">
-          <img src="sudip3.jpeg" alt="Sudip Bhasima">
+    <div class="container row">
+      <div class="about-col-1">
+        <img src="sudip3.jpeg" alt="Sudip Bhasima">
+      </div>
+      <div class="about-col-2">
+        <h1 class="sub-title">About Me</h1>
+        <p>
+          I'm <strong>Sudip Bhasima</strong>, a BCA student and aspiring web developer with a focus on 
+          <strong>frontend design</strong> and <strong>PHP backend development</strong>. 
+          I enjoy building responsive and user-friendly websites using <strong>HTML, CSS, JavaScript, PHP, and MySQL</strong>. 
+          Currently, I'm learning <strong>React</strong> to expand my frontend skills.
+        </p>
+
+        <!-- Tab Menu -->
+        <div class="tab-titles">
+          <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+          <p class="tab-links" onclick="opentab('education')">Education</p>
         </div>
-        <div class="about-col-2">
-          <h1 class="sub-title">About Me</h1>
-          <p>
-            I'm Sudip Bhasima, a passionate frontend web developer and BCA student with a
-             growing love for clean, responsive design and interactive user experiences.
-              I strive to make an impact through web technologies like HTML, CSS, JavaScript, and PHP.
-          </p>
-          <div class="tab-titles">
-            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-            <p class="tab-links" onclick="opentab('education')">Education</p>
-            <p class="tab-links" onclick="opentab('project-tab')">Projects</p>
+
+        <!-- Skills -->
+        <div class="tab-contents active-tab" id="skills">
+          <div class="skills-container">
+            <div class="skills-box">
+              <h3>Technical Skills</h3>
+              <ul>
+                <li>Frontend: HTML, CSS, JavaScript</li>
+                <li>Backend: PHP, MySQL</li>
+                <li>Tools: Git, VS Code, XAMPP</li>
+                <li>Learning: React, Python basics</li>
+              </ul>
+            </div>
+            <div class="skills-box">
+              <h3>Soft Skills</h3>
+              <ul>
+                <li>Communication</li>
+                <li>Teamwork</li>
+                <li>Adaptability</li>
+                <li>Problem Solving</li>
+              </ul>
+            </div>
           </div>
-          <div class="tab-contents active-tab" id="skills">
-            <ul>
-              <li>Communication</li>
-              <li>Teamwork</li>
-              <li>Adaptability</li>
-              <li>Backend Development (PHP, MySQL)</li>
-              <li>Frontend Basics (HTML, CSS, JS)</li>
-              <li>Python</li>
-              <li>Responsive Design</li>
-            </ul>
-          </div>
-          <div class="tab-contents" id="education">
-            <ul>
-              <li><span>2017</span><br>SEE from Prime Academy</li>
-              <li><span>2019</span><br>+2 from Seabird International College</li>
-              <li><span>2025 (Expected)</span><br>BCA from Milton International College</li>
-            </ul>
-          </div>
-          <div class="tab-contents" id="project-tab">
-            <ul>
-              <li><span>Blood Bank Management System</span><br>Manage blood donations using PHP, MySQL, and JavaScript.</li>
-              <li><span>Portfolio Website</span><br>Responsive personal portfolio built with HTML, CSS, and JS.</li>
-              <li><span>Online Pharmacy Management</span><br>Medicine ordering and user portal system built with PHP and MySQL.</li>
-            </ul>
-          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="tab-contents" id="education">
+          <ul>
+            <li><span>2017</span><br>SEE from Prime Academy</li>
+            <li><span>2019</span><br>+2 from Seabird International College</li>
+            <li><span>2026 (Expected)</span><br>BCA from Milton International College</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="project-section">
+  <!-- Projects -->
+  <section id="projects">
     <div class="container">
       <h2 class="project-title">My Projects</h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <h3>Blood Bank Management</h3>
-          <p><strong>Description:</strong> Manage donations, requests & blood stock. Built with PHP & MySQL.</p>
-          <p><strong>Link:</strong> <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank">View Project</a></p>
-        </div>
-        <div class="project-card">
-          <h3>Portfolio Website</h3>
-          <p><strong>Description:</strong> Responsive personal portfolio built with HTML, CSS & JavaScript.</p>
-          <p><strong>Link:</strong> <a href="https://github.com/yourusername/portfolio-website" target="_blank">View Project</a></p>
-        </div>
-        <div class="project-card">
-          <h3>Online Pharmacy</h3>
-          <p><strong>Description:</strong> Online pharmacy with user panel & admin control. Built with PHP.</p>
-          <p><strong>Link:</strong> <a href="https://github.com/yourusername/online-pharmacy" target="_blank">View Project</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="contact-left">
-          <h1 class="sub-title">Contact Me</h1>
-          <p><a href="mailto:bhasimasudip05@gmail.com"><i class="fa-solid fa-paper-plane"></i> bhasimasudip05@gmail.com</a></p>
-          <p><a href="tel:+9779866443370"><i class="fa-solid fa-phone"></i> +977 9866443370</a></p>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/TheKing.Sudip/"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/yourprofile"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://np.linkedin.com/in/sudip-bhasima-47183b305"><i class="fa-brands fa-linkedin"></i></a>
+      <!-- Filter Buttons -->
+      <div class="filter-btns">
+        <button onclick="filterProjects('all')">All</button>
+        <button onclick="filterProjects('php')">PHP</button>
+        <button onclick="filterProjects('react')">React</button>
+        <button onclick="filterProjects('python')">Python</button>
+        <button onclick="filterProjects('frontend')">Frontend</button>
+      </div>
+
+      <!-- Project Slider -->
+      <div class="project-slider">
+        <div class="project-list" id="project-list">
+          <div class="project-card php">
+            <a href="bbms.html">
+              <h3>Blood Bank Management</h3>
+              <img src="d:\sudip\Portfolio\BBMS\Landing_page.png" alt="Blood Bank">
+              <p>Manage donations & blood stock. Built with PHP & MySQL.</p>
+            </a>
           </div>
-          <a href="Resume.pdf" download class="btn btn2">Download CV</a>
+
+          <div class="project-card frontend">
+            <h3>Portfolio Website</h3>
+            <a href="portfolio.html">
+              <img src="images/portfolio.png" alt="Portfolio">
+            </a>
+            <p>Responsive portfolio built with HTML, CSS, JS.</p>
+          </div>
+
+          <div class="project-card php">
+            <h3>Online Pharmacy</h3>
+            <a href="pharmacy.html">
+              <img src="images/pharmacy.png" alt="Pharmacy">
+            </a>
+            <p>Pharmacy system with user & admin control (PHP).</p>
+          </div>
+
+          <div class="project-card python">
+            <h3>Online Pharmacy</h3>
+            <a href="python.html">
+              <img src="images/pharmacy.png" alt="python">
+            </a>
+            <p>Pharmacy system with user & admin control (Python).</p>
+          </div>
+
+          <!-- <div class="project-card react">
+            <h3>React Todo App</h3>
+            <img src="images/reactapp.png" alt="React App">
+            <p>Simple todo app with React.</p>
+          </div> -->
         </div>
-        <div class="contact-right">
-          <form action="sudip.php" method="post">
-            <label for="name">Full Name:</label>
-            <input type="text" name="name" placeholder="Your Name" required>
-            <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <label for="phone">Phone:</label>
-            <input type="tel" name="phone" placeholder="Phone Number" required>
-            <label for="message">Message:</label>
-            <textarea name="message" rows="6" placeholder="Your Message"></textarea>
-            <b>It's not working for now, please contact via email, SMS, call, or Facebook.</b>
-            <input type="submit" name="submit" class="btn btn2" value="Send Message">
-          </form>
+
+        <!-- Controls -->
+        <div class="slider-controls">
+          <button onclick="prevSlide()">❮</button>
+          <button onclick="nextSlide()">❯</button>
+          <div class="project-dots" id="project-dots"></div>
+
         </div>
       </div>
     </div>
   </section>
 
-<!-- Scroll to Top Button -->
-<button id="scroll-top" onclick="scrollToTop()" aria-label="Scroll to Top" style="display: none;">
-  <i class="fa-solid fa-arrow-up"></i>
-</button>
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container row">
+      <div class="contact-left">
+        <h1 class="sub-title">Contact Me</h1>
+        <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep@gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/TheKing.Sudip/" aria-label="Facebook Profile"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/yourprofile" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/yourprofile" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        <a href="Resume.pdf" download class="btn btn2">📄 Download CV</a>
+      </div>
+      <div class="contact-right">
+        <form action="send_mail.php" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn2">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
+  <!-- Scroll-to-top -->
+  <button id="scroll-top" onclick="scrollToTop()">
+    <i class="fa-solid fa-arrow-up"></i>
   </button>
 
   <script src="script.js"></script>
