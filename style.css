@@ -47,8 +47,12 @@ nav {
   flex-wrap: wrap;
 }
 
-.logo {
-  width: 40px;
+.logo-text {
+  font-family: 'Poppins', sans-serif; /* or any font you like */
+  font-size: 24px;
+  font-weight: 600;
+  color: #ac6f6f;
+  letter-spacing: 1px;
 }
 
 nav ul li {
@@ -243,24 +247,32 @@ nav ul li a:hover::after {
   overflow: hidden;
   max-width: 100%;
   padding: 10px;
+  margin: auto;
+}
+
+.tight-section {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .project-list {
   display: flex;
-  gap: 0;
+  flex-wrap: nowrap;
+  justify-content: center; /* centers the cards */
+  gap: 10px; /* optional: small gap between cards */
   transition: transform 0.5s ease-in-out;
-  flex-wrap: nowrap; /* keeps items in a single line */
+
 }
 
 .project-card {
-  flex: 0 0 300px; /* fixed width per card */
+  flex: 0 0 300px; 
   background: #1e1e1e;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
   border: 1px solid #2a2a2a;
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin: 0;
+  transition: transform 0.5s, box-shadow 0.3s;
+  margin: 0 -139px 6px 0px;
 }
 
 .project-card img {
@@ -455,7 +467,7 @@ nav .fa-solid {
 
   /* Header */
   #header {
-    background-image: url('mj.jpg'); /* mobile background */
+    /* background-image: url('mj.jpg'); mobile background */
     background-size: cover;
     background-position: center;
   }
@@ -596,4 +608,15 @@ a {
 a:hover {
   color: #e60043;
 }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #2b7d8f38;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 30px;
+    }
 
+    footer a {
+      color: #d10000;
+    }

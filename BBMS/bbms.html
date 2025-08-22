@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blood Bank Management System</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #d10000;
+      --hover-color: #ff6600;
+      --header-bg: #0c0808;
+      --footer-bg: #f2f2f2;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: var(--hover-color);
+    }
+
+    header {
+      background-color: var(--header-bg);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav a {
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    header nav a:hover {
+      background-color: var(--accent-color);
+    }
+
+    .theme-toggle {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--hover-color);
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ff6f61, #ffc371);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 30px auto;
+      max-width: 900px;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .blog-title {
+      color: var(--accent-color);
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .meta {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .slider {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      text-align: center;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      /* Makes image fill slider width */
+      height: auto;
+      /* Keeps full proportion, no crop */
+      max-height: 500px;
+      /* Optional: adjust max height */
+      object-fit: contain;
+      /* Ensures full image fits without cutting */
+    }
+
+    .slide figcaption {
+      text-align: center;
+      font-size: 0.9em;
+      color: #444;
+      margin-top: 8px;
+    }
+
+
+
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .prev,
+    .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 18px;
+      z-index: 10;
+    }
+
+    .prev:hover,
+    .next:hover {
+      background-color: var(--hover-color);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .blog-post {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #563f3f;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    .github-btn,
+    .demo-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--header-bg);
+      color: #fff;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .github-btn:hover,
+    .demo-btn:hover {
+      background-color: var(--accent-color);
+    }
+
+    .github-btn::before {
+      content: "🔗 ";
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--header-bg);
+      color: #fff;
+      border-radius: 5px;
+      transition: 0.3s;
+      margin-top: 40px;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--footer-bg);
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .theme-toggle {
+        margin-top: 10px;
+      }
+
+      .blog-title {
+        font-size: 1.5em;
+      }
+
+      main {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Home</a>
+<a href="../index.html#projects">Projects</a>
+    <button onclick="toggleTheme()" class="theme-toggle">🌓 Toggle Theme</button>
+  </header>
+
+  <section class="hero">
+    <h1>Blood Bank Management System</h1>
+    <p>A centralized system for managing blood donations, donors, and recipients efficiently.
+    </p>
+  </section>
+
+  <main>
+    <article class="blog-post">
+      <h1 class="blog-title">Blood Bank Management System: Building a Full-Stack Application</h1>
+      <p class="meta">Published by Sudip Bhasima · August 22, 2025</p>
+
+      <div class="slider">
+        <figure class="slide active">
+          <img src="Landing_page.png" alt="Landing Page Screenshot" />
+          <figcaption>Landing Page</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="about_us.png" alt="About Us Screenshot" />
+          <figcaption>About Us</figcaption>
+        </figure>
+
+        <button class="prev" onclick="prevSlide()">❮</button>
+        <button class="next" onclick="nextSlide()">❯</button>
+      </div>
+
+
+      <h2>Overview</h2>
+      <p>
+        The Blood Bank Management System (BBMS)
+        is a full-stack project that simplifies
+        the process of managing blood donors,
+        requests, and stock availability.
+        It ensures transparency, quick access to
+        donor data, and efficient blood request
+        handling.</p>
+
+      <h2>Technologies Used</h2>
+      <ul>
+        <li>HTML5 & CSS3</li>
+        <li>JavaScript</li>
+        <li>PHP (Backend Logic)</li>
+        <li>MySQL (Database)</li>
+        <li>VS Code (Development Environment)</li>
+      </ul>
+
+      <h2>Features</h2>
+      <ul>
+        <li>Donor registration and management</li>
+        <li>Blood stock tracking</li>
+        <li>Request and approval workflow</li>
+        <li>Admin dashboard for system monitoring</li>
+        <li>Responsive UI for both desktop and mobile</li>
+      </ul>
+
+      <h2>Role & Responsibilities</h2>
+      <p>
+        I designed and implemented the backend logic for donor registration, request handling,
+        and stock updates. Additionally, I built the frontend UI and integrated it with
+        the database for real-time updates.
+      </p>
+
+      <h2>Challenges & Learnings</h2>
+      <p>
+        The main challenge was maintaining consistency between stock levels and requests.
+        Handling concurrent requests required transaction management in MySQL.
+        This project strengthened my knowledge in database design, secure PHP coding,
+        and responsive UI practices.
+      </p>
+
+      <h2>Team</h2>
+      <p>Developed by a team of 2 members.</p>
+
+      <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank" class="github-btn">View Source
+        on GitHub</a>
+      <a href="#" class="demo-btn">Live Demo (Coming Soon)</a>
+
+      <br />
+      <a href="../projects.html" class="btn">← Back to Projects</a>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Sudip Bhasima · <a href="https://github.com/sudipdev" target="_blank">GitHub Profile</a></p>
+  </footer>
+
+  <script>
+    let darkMode = false;
+    function toggleTheme() {
+      darkMode = !darkMode;
+      document.documentElement.style.setProperty('--bg-color', darkMode ? '#1e1e1e' : '#ffffff');
+      document.documentElement.style.setProperty('--text-color', darkMode ? '#f0f0f0' : '#000000');
+      document.documentElement.style.setProperty('--accent-color', darkMode ? '#ff6f61' : '#d10000');
+      document.documentElement.style.setProperty('--hover-color', darkMode ? '#ffa07a' : '#ff6600');
+      document.documentElement.style.setProperty('--header-bg', darkMode ? '#333333' : '#0c0808');
+      document.documentElement.style.setProperty('--footer-bg', darkMode ? '#222' : '#f2f2f2');
+      document.documentElement.style.setProperty('--card-bg', darkMode ? '#2a2a2a' : '#ffffff');
+    }
+
+    // Image slider logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    // Optional: Auto-slide every 6 seconds
+    setInterval(nextSlide, 6000);
+  </script>
+</body>
+
+</html>
