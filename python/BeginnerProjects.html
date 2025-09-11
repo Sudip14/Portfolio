@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blood Bank Management System</title>
+  <title>Terminal Python Projects</title>
   <style>
     :root {
       --bg-color: #ffffff;
@@ -119,13 +118,10 @@
 
     .slide img {
       width: 100%;
-      /* Makes image fill slider width */
       height: auto;
-      /* Keeps full proportion, no crop */
       max-height: 500px;
-      /* Optional: adjust max height */
       object-fit: contain;
-      /* Ensures full image fits without cutting */
+      border-radius: 8px;
     }
 
     .slide figcaption {
@@ -135,20 +131,7 @@
       margin-top: 8px;
     }
 
-
-
-    @keyframes fade {
-      from {
-        opacity: 0.4;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .prev,
-    .next {
+    .prev, .next {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -162,18 +145,12 @@
       z-index: 10;
     }
 
-    .prev:hover,
-    .next:hover {
+    .prev:hover, .next:hover {
       background-color: var(--hover-color);
     }
 
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
     .blog-post {
       background-color: var(--card-bg);
@@ -193,8 +170,7 @@
       margin-left: 20px;
     }
 
-    .github-btn,
-    .demo-btn {
+    .github-btn, .demo-btn {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 20px;
@@ -204,8 +180,7 @@
       transition: 0.3s;
     }
 
-    .github-btn:hover,
-    .demo-btn:hover {
+    .github-btn:hover, .demo-btn:hover {
       background-color: var(--accent-color);
     }
 
@@ -265,90 +240,79 @@
     }
   </style>
 </head>
-
 <body>
   <header>
     <nav>
       <a href="../index.html">Home</a>
-<a href="../index.html#projects">Projects</a>
+      <a href="../index.html#projects">Projects</a>
+    </nav>
     <button onclick="toggleTheme()" class="theme-toggle">🌓 Toggle Theme</button>
   </header>
 
   <section class="hero">
-    <h1>Blood Bank Management System</h1>
-    <p>A centralized system for managing blood donations, donors, and recipients efficiently.
-    </p>
+    <h1>Terminal-Based Python Projects</h1>
+    <p>A collection of interactive command-line applications built with Python to practice logic, input handling, and user experience.</p>
   </section>
 
   <main>
     <article class="blog-post">
-      <h1 class="blog-title">Blood Bank Management System: Building a Full-Stack Application</h1>
-      <p class="meta">Published by Sudip Bhasima · August 22, 2025</p>
+      <h1 class="blog-title">Building CLI Tools with Python</h1>
+      <p class="meta">Published by Sudip Bhasima · September 11, 2025</p>
 
       <div class="slider">
         <figure class="slide active">
-          <img src="Landing_page.png" alt="Landing Page Screenshot" />
-          <figcaption>Landing Page</figcaption>
+          <img src="strong_password_generater.png" alt="Password Generator Screenshot" />
+          <figcaption>Password Generator</figcaption>
         </figure>
         <figure class="slide">
-          <img src="about_us.png" alt="About Us Screenshot" />
-          <figcaption>About Us</figcaption>
+          <img src="todo_list.png" alt="Todo List Screenshot" />
+          <figcaption>Todo List CLI</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="calculator.png" alt="Calculator Screenshot" />
+          <figcaption>CLI Calculator</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="number_guesing_game.png" alt="Number Guessing Game Screenshot" />
+          <figcaption>Number Guessing Game</figcaption>
         </figure>
 
         <button class="prev" onclick="prevSlide()">❮</button>
         <button class="next" onclick="nextSlide()">❯</button>
       </div>
 
-
       <h2>Overview</h2>
       <p>
-        The Blood Bank Management System (BBMS)
-        is a full-stack project that simplifies
-        the process of managing blood donors,
-        requests, and stock availability.
-        It ensures transparency, quick access to
-        donor data, and efficient blood request
-        handling.</p>
+        These CLI projects were designed to strengthen my understanding of Python fundamentals, including loops, conditionals, and user input. Each tool solves a practical problem and runs entirely in the terminal.
+      </p>
 
       <h2>Technologies Used</h2>
       <ul>
-        <li>HTML5 & CSS3</li>
-        <li>JavaScript</li>
-        <li>PHP (Backend Logic)</li>
-        <li>MySQL (Database)</li>
-        <li>VS Code (Development Environment)</li>
+        <li>Python 3</li>
+        <li>VS Code</li>
+        <li>Command Line / PowerShell</li>
       </ul>
 
-      <h2>Features</h2>
+      <h2>Featured Projects</h2>
       <ul>
-        <li>Donor registration and management</li>
-        <li>Blood stock tracking</li>
-        <li>Request and approval workflow</li>
-        <li>Admin dashboard for system monitoring</li>
-        <li>Responsive UI for both desktop and mobile</li>
+        <li><strong>Password Generator:</strong> Enforces minimum length and generates secure passwords.</li>
+        <li><strong>Todo List CLI:</strong> Menu-driven task manager with status tracking.</li>
+        <li><strong>CLI Calculator:</strong> Adds numbers interactively and displays the running total.</li>
+        <li><strong>Number Guessing Game:</strong> Feedback-based guessing with attempt counter.</li>
       </ul>
 
       <h2>Role & Responsibilities</h2>
       <p>
-        I designed and implemented the backend logic for donor registration, request handling,
-        and stock updates. Additionally, I built the frontend UI and integrated it with
-        the database for real-time updates.
-      </p>
-
-      <h2>Challenges & Learnings</h2>
-      <p>
-        The main challenge was maintaining consistency between stock levels and requests.
-        Handling concurrent requests required transaction management in MySQL.
-        This project strengthened my knowledge in database design, secure PHP coding,
-        and responsive UI practices.
-      </p>
+        I designed and coded each project independently, focusing on clean logic, user-friendly prompts, 
+        and error handling. These projects were built iteratively, with attention to usability and terminal-based interaction. 
+        I ensured that each tool was intuitive, responsive, and capable of handling edge cases gracefully.
+    </p>
 
       <h2>Team</h2>
-      <p>Developed by a team of 2 members.</p>
+      <p>Solo project — all design, development, and testing were handled by me.</p>
 
-      <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank" class="github-btn">View Source
-        on GitHub</a>
-      <a href="#" class="demo-btn">Live Demo (Coming Soon)</a>
+      <a href="https://github.com/Sudip14" target="_blank" class="github-btn">View All Projects on GitHub</a>
+      <a href="#" class="demo-btn">Live Demo (Terminal Only)</a>
 
       <br />
       <a href="../index.html#projects" class="btn">← Back to Projects</a>
@@ -372,7 +336,6 @@
       document.documentElement.style.setProperty('--card-bg', darkMode ? '#2a2a2a' : '#ffffff');
     }
 
-    // Image slider logic
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 
@@ -392,9 +355,7 @@
       showSlide(currentSlide);
     }
 
-    // Optional: Auto-slide every 6 seconds
     setInterval(nextSlide, 6000);
   </script>
 </body>
-
 </html>
