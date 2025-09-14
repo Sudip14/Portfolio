@@ -162,7 +162,7 @@
     <div class="container row">
       <div class="contact-left">
         <h1 class="sub-title">Contact Me</h1>
-        <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep@gmail.com</p>
+        <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep05@gmail.com</p>
         <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
           <div class="social-icons">
             <a href="https://www.facebook.com/TheKing.Sudip/" aria-label="Facebook Profile"><i class="fa-brands fa-facebook"></i></a>
@@ -179,17 +179,21 @@
   <button type="submit" class="btn btn2">Send Message</button>
 </form>
 
+<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  emailjs.init("YOUR_USER_ID"); // from EmailJS dashboard
+  // Initialize EmailJS with your Public Key
+  emailjs.init("YOUR_PUBLIC_KEY"); // e.g., QpRjA_bc123xyz
 
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
-    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+
+    emailjs.sendForm("service_yvzbmub", "template_048g9pv", this)
       .then(() => {
-        alert("Message sent successfully!");
+        alert("✅ Message sent successfully!");
+        this.reset(); // clear form
       }, (err) => {
-        alert("Failed to send message: " + JSON.stringify(err));
+        alert("❌ Failed to send message: " + JSON.stringify(err));
       });
   });
 </script>
