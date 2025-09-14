@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers .= "Reply-To: $email\r\n";
 
     if (mail($to, $subject, $body, $headers)) {
-        echo " Message sent successfully!";
+        echo "Message sent successfully!";
     } else {
-        echo " Sorry, your message could not be sent. Please try again later.";
+        echo "Sorry, your message could not be sent. Please try again later.";
     }
 }
 ?>
