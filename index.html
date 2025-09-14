@@ -172,12 +172,28 @@
         <a href="Resume.pdf" download class="btn btn2">📄 Download CV</a>
       </div>
       <div class="contact-right">
-        <form action="send_mail.php" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-          <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn btn2">Send Message</button>
-        </form>
+        <form id="contact-form">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn btn2">Send Message</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("YOUR_USER_ID"); // from EmailJS dashboard
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+      .then(() => {
+        alert("Message sent successfully!");
+      }, (err) => {
+        alert("Failed to send message: " + JSON.stringify(err));
+      });
+  });
+</script>
+
       </div>
     </div>
   </section>
