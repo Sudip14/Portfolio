@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Sudip Bhasima's Portfolio | Web Developer, BCA Student from Nepal. Explore my projects, skills, and contact details." />
-  <meta name="description"
-    content="Sudip Bhasima's portfolio showcasing PHP projects, backend development, and emotional storytelling.">
   <meta name="keywords"
     content="Sudip Bhasima, PHP developer, BCA student, portfolio, backend projects, emotional storytelling">
   <title>Sudip Bhasima | Portfolio</title>
@@ -21,17 +19,18 @@
   <!-- Header -->
   <header id="header">
     <div class="container">
-
       <nav>
-        <h4 class="logo"> <a href="index.html"><img src="favicon.png" alt="Sudip Bhasima" /></a></h4>
+        <h4 class="logo">
+          <a href="index.html"><img src="favicon.png" alt="Sudip Bhasima" /></a>
+        </h4>
         <ul id="sidemenu">
           <li><a href="#header">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
-          <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+          <i class="fa-solid fa-circle-xmark" id="menu-close"></i>
         </ul>
-        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        <i class="fa-solid fa-bars" id="menu-open"></i>
       </nav>
       <div class="header-text">
         <p>Frontend & Backend Developer | BCA Student</p>
@@ -48,17 +47,17 @@
       </div>
       <div class="about-col-2">
         <h1 class="sub-title">About Me</h1>
-    <p>
-  I'm <strong>Sudip Bhasima</strong>, a BCA student and passionate web developer from Kathmandu, Nepal.
-  I enjoy creating responsive and user-friendly websites using <strong>HTML, CSS, JavaScript, PHP, and MySQL</strong>.
-  I love learning new technologies and improving my skills to build innovative and effective web solutions.
-</p>
-
+        <p>
+          I'm <strong>Sudip Bhasima</strong>, a BCA student and passionate web developer from Kathmandu, Nepal.
+          I enjoy creating responsive and user-friendly websites using
+          <strong>HTML, CSS, JavaScript, PHP, and MySQL</strong>.
+          I love learning new technologies and improving my skills to build innovative and effective web solutions.
+        </p>
 
         <!-- Tab Menu -->
         <div class="tab-titles">
-          <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-          <p class="tab-links" onclick="opentab('education')">Education</p>
+          <p class="tab-links active-link" onclick="opentab('skills', event)">Skills</p>
+          <p class="tab-links" onclick="opentab('education', event)">Education</p>
         </div>
 
         <!-- Skills -->
@@ -72,7 +71,6 @@
                 <li><strong>Tools:</strong> Git, VS Code, XAMPP</li>
                 <li><strong>Languages:</strong> Python</li>
                 <li><strong>Currently Learning:</strong> React, Django</li>
-
               </ul>
             </div>
             <div class="skills-box">
@@ -108,7 +106,6 @@
       <div class="filter-btns">
         <button onclick="filterProjects('all')">All</button>
         <button onclick="filterProjects('php')">PHP</button>
-        <!-- <button onclick="filterProjects('react')">React</button> -->
         <button onclick="filterProjects('python')">Python</button>
         <button onclick="filterProjects('frontend')">Frontend</button>
       </div>
@@ -123,42 +120,27 @@
               <p>Manage donations & blood stock. Built with PHP & MySQL.</p>
             </a>
           </div>
-
-<!-- frontend project -->
           <div class="project-card frontend">
-            <h3>Portfolio Website</h3>
             <a href="index.html">
+              <h3>Portfolio Website</h3>
               <img src="Portfolio/landing.png" alt="Portfolio">
+              <p>Responsive portfolio built with HTML, CSS, JS.</p>
             </a>
-            <p>Responsive portfolio built with HTML, CSS, JS.</p>
           </div>
-
-          <!-- php project -->
           <div class="project-card php">
-            <h3>Online Pharmacy</h3>
             <a href="pharmacy.html">
+              <h3>Online Pharmacy</h3>
               <img src="images/pharmacy.png" alt="Pharmacy">
+              <p>Pharmacy system with user & admin control (PHP).</p>
             </a>
-            <p>Pharmacy system with user & admin control (PHP).</p>
           </div>
-
-
-          <!-- python project -->
           <div class="project-card python">
-            <h3>Terminal-Based Python Projects</h3>
             <a href="python/BeginnerProjects.html">
+              <h3>Terminal-Based Python Projects</h3>
               <img src="python/calculator.png" alt="python">
+              <p>Collection of command-line Python apps to practice logic & input handling.</p>
             </a>
-            <p>A collection of interactive command-line applications built with Python to practice logic, input
-              handling, and user experience.</p>
           </div>
-
-          <!-- react project -->
-          <!-- <div class="project-card react">
-            <h3>React Todo App</h3>
-            <img src="images/reactapp.png" alt="React App">
-            <p>Simple todo app with React.</p>
-          </div> -->
         </div>
 
         <!-- Controls -->
@@ -166,7 +148,6 @@
           <button onclick="prevSlide()">❮</button>
           <button onclick="nextSlide()">❯</button>
           <div class="project-dots" id="project-dots"></div>
-
         </div>
       </div>
     </div>
@@ -196,26 +177,6 @@
           <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
           <button type="submit" class="btn btn2">Send Message</button>
         </form>
-
-        <!-- EmailJS SDK -->
-        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-        <script>
-          // Initialize EmailJS with your Public Key
-          emailjs.init("QdlqQtJQWOfHJmWIq"); // e.g., QpRjA_bc123xyz
-
-          document.getElementById("contact-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            emailjs.sendForm("service_yvzbmub", "template_048g9pv", this)
-              .then(() => {
-                alert("✅ Message sent successfully!");
-                this.reset(); // clear form
-              }, (err) => {
-                alert("❌ Failed to send message: " + JSON.stringify(err));
-              });
-          });
-        </script>
-
       </div>
     </div>
   </section>
@@ -225,11 +186,10 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-  <script src="script.js"></script>
-
   <footer>
-    <p>© 2025 Sudip Bhasima.  <a rel="noopener" href="https://github.com/sudip14" target="_blank">GitHub Profile</a></p>
+    <p>© 2025 Sudip Bhasima. <a href="https://github.com/sudip14" target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
   </footer>
-</body>
 
+  <script src="script.js"></script>
+</body>
 </html>
