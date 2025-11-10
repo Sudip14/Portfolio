@@ -154,42 +154,63 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact">
-    <div class="container row">
-      <div class="contact-left">
-        <h1 class="sub-title">Contact Me</h1>
-        <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep05@gmail.com</p>
-        <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/TheKing.Sudip/" aria-label="Facebook Profile"><i
-              class="fa-brands fa-facebook"></i></a>
-          <a href="https://www.instagram.com/sudipbhasima/" aria-label="Instagram Profile"><i
-              class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/sudipbhasima/" aria-label="LinkedIn Profile"><i
-              class="fa-brands fa-linkedin"></i></a>
-        </div>
-        <a href="Resume.pdf" download class="btn btn2">📄 Download CV</a>
+   
+<!-- Contact -->
+<section id="contact">
+  <div class="container row">
+    <div class="contact-left">
+      <h1 class="sub-title">Contact Me</h1>
+      <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep05@gmail.com</p>
+      <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/TheKing.Sudip/" aria-label="Facebook Profile"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/sudipbhasima/" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/sudipbhasima/" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
       </div>
-      <div class="contact-right">
-        <form id="contact-form">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-          <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn btn2">Send Message</button>
-        </form>
-      </div>
+      <a href="Resume.pdf" download class="btn btn2">📄 Download CV</a>
     </div>
-  </section>
+    <div class="contact-right">
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn2">Send Message</button>
+      </form>
 
-  <!-- Scroll-to-top -->
-  <button aria-label="Scroll to top" id="scroll-top" onclick="scrollToTop()">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
+      <!-- EmailJS SDK -->
+      <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+      <script>
+        // Initialize EmailJS
+        emailjs.init("QdlqQtJQWOfHJmWIq"); // replace with your EmailJS public key
 
-  <footer>
-    <p>© 2025 Sudip Bhasima. <a href="https://github.com/sudip14" target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
-  </footer>
+        const contactForm = document.getElementById("contact-form");
+        contactForm.addEventListener("submit", function(e) {
+          e.preventDefault();
 
-  <script src="script.js"></script>
+          emailjs.sendForm("service_yvzbmub", "template_048g9pv", this)
+            .then(() => {
+              alert("✅ Message sent successfully!");
+              this.reset(); // clear the form
+            }, (err) => {
+              alert("❌ Failed to send message: " + JSON.stringify(err));
+            });
+        });
+      </script>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll-to-top -->
+<button aria-label="Scroll to top" id="scroll-top" onclick="scrollToTop()">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<footer>
+  <p>© 2025 Sudip Bhasima. <a href="https://github.com/sudip14" target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
+</footer>
+
+<!-- Main JS file -->
+<script src="script.js"></script>
+
 </body>
 </html>
