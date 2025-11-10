@@ -1,4 +1,3 @@
-/* --- GLOBAL STYLES --- */
 * {
   margin: 0;
   padding: 0;
@@ -15,19 +14,24 @@ body {
   color: #e35a0a;
 }
 
-/* --- HEADER --- */
+/* Header */
 #header {
   width: 100%;
   height: 100vh;
-  background: url('bg.jpeg') center/cover no-repeat;
+  background-image: url('bg.jpeg');
+  background-size: cover;
+  background-position: center;
   position: relative;
 }
 
 #header::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(12, 8, 8, 0.6); /* dark overlay */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 8, 8, 0.6); /* dark overlay for readability */
 }
 
 .container {
@@ -43,31 +47,27 @@ nav {
   flex-wrap: wrap;
 }
 
-.logo {
+.logo{
   display: flex;
   height: 79px;
-}
 
-.logo img {
+}
+.logo img{
   height: 100%;
   border-radius: 50%;
 }
 
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-}
-
 nav ul li {
+  display: inline-block;
+  list-style: none;
   margin: 10px 20px;
 }
 
 nav ul li a {
   color: #fbfeff;
+  text-decoration: none;
   font-size: 18px;
   position: relative;
-  text-decoration: none;
 }
 
 nav ul li a::after {
@@ -85,12 +85,11 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-/* --- HEADER TEXT --- */
 .header-text {
   margin-top: 20%;
   font-size: 20px;
   color: #fff;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0,0,0,0.4);
   display: inline-block;
   padding: 15px 25px;
   border-radius: 8px;
@@ -105,7 +104,7 @@ nav ul li a:hover::after {
   color: #ff004f;
 }
 
-/* --- ABOUT SECTION --- */
+/* About */
 #about {
   padding: 80px 0;
   color: #ababaa;
@@ -182,12 +181,12 @@ nav ul li a:hover::after {
   font-size: 14px;
 }
 
-/* --- SKILLS SECTION --- */
+/* Skills Section */
 .skills-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 40px;
   margin-top: 20px;
+  flex-wrap: wrap; /* stacks on mobile */
 }
 
 .skills-box {
@@ -213,19 +212,19 @@ nav ul li a:hover::after {
   color: #ddd;
 }
 
-/* --- PROJECTS SECTION --- */
+/* --- PROJECTS --- */
 #projects {
-  padding: 0;
+  padding: 0px 0;
   background-color: #0c0808;
   color: #fff;
   text-align: center;
 }
 
+/* Filter Buttons */
 .filter-btns {
   text-align: center;
   margin-bottom: 30px;
 }
-
 .filter-btns button {
   margin: 5px;
   padding: 10px 20px;
@@ -237,35 +236,46 @@ nav ul li a:hover::after {
   font-size: 14px;
   transition: all 0.3s ease;
 }
-
 .filter-btns button:hover,
 .filter-btns button.active {
   background: #ff004f;
+  color: #fff;
   transform: scale(1.05);
 }
 
-/* Project Cards */
+/* Project Slider */
 .project-slider {
+  position: relative;
   overflow: hidden;
   max-width: 100%;
+  padding: 10px;
   margin: auto;
+
+}
+
+.tight-section {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .project-list {
   display: flex;
-  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: center; /* centers the cards */
+  gap: 10px; /* optional: small gap between cards */
   transition: transform 0.5s ease-in-out;
+
 }
 
 .project-card {
-  flex: 0 0 300px;
+  flex: 0 0 300px; 
   background: #1e1e1e;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
   border: 1px solid #2a2a2a;
   transition: transform 0.5s, box-shadow 0.3s;
-  margin: 0 -139px 6px 0;
+  margin: 0 -139px 6px 0px;
 }
 
 .project-card img {
@@ -298,7 +308,6 @@ nav ul li a:hover::after {
   text-align: center;
   margin-top: 20px;
 }
-
 .slider-controls button {
   background: #ff004f;
   color: #fff;
@@ -310,17 +319,15 @@ nav ul li a:hover::after {
   font-size: 18px;
   transition: background 0.3s;
 }
-
 .slider-controls button:hover {
   background: #e60043;
 }
 
-/* Pagination dots */
+/* Dots / Pagination */
 .project-dots {
   text-align: center;
   margin-top: 15px;
 }
-
 .project-dots .dot {
   display: inline-block;
   width: 12px;
@@ -331,13 +338,12 @@ nav ul li a:hover::after {
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
 }
-
 .project-dots .dot.active {
   background: #ff004f;
   transform: scale(1.2);
 }
 
-/* --- BUTTONS --- */
+/* Buttons */
 .btn {
   display: inline-block;
   border: 1px solid #ff004f;
@@ -357,7 +363,7 @@ nav ul li a:hover::after {
   background: #ff004f;
 }
 
-/* --- CONTACT SECTION --- */
+/* Contact */
 .contact-left {
   color: #fff;
   flex-basis: 35%;
@@ -396,7 +402,9 @@ nav ul li a:hover::after {
   transform: translateY(-5px) scale(1.1);
 }
 
+/* Contact Form */
 .contact-right form {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -404,14 +412,14 @@ nav ul li a:hover::after {
 .contact-right input,
 .contact-right textarea {
   width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 6px;
   border: none;
   outline: none;
   background: #262626;
+  padding: 15px;
+  margin: 10px 0;
   color: #fff;
   font-size: 16px;
+  border-radius: 6px;
 }
 
 .contact-right button {
@@ -428,7 +436,7 @@ nav ul li a:hover::after {
   background: #e60043;
 }
 
-/* --- SCROLL TOP BUTTON --- */
+/* Scroll-to-top */
 #scroll-top {
   position: fixed;
   bottom: 30px;
@@ -443,8 +451,8 @@ nav ul li a:hover::after {
   line-height: 45px;
   cursor: pointer;
   display: none;
-  font-size: 18px;
   z-index: 999;
+  font-size: 18px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -452,25 +460,30 @@ nav ul li a:hover::after {
   background: #e60043;
 }
 
-/* --- FOOTER --- */
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: rgba(43, 125, 143, 0.2);
-  font-size: 0.9em;
-  color: #555;
+/* Responsive */
+nav .fa-solid {
+  display: none;
 }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(43, 125, 143, 0.2);
+    font-size: 0.9em;
+    color: #555;
+  }
 
-footer a {
-  color: #d10000;
-  text-decoration: none;
-}
+  footer a {
+    color: #d10000;
+    text-decoration: none;
+  }
 
-footer a:hover {
-  color: #ff004f;
-}
+  footer a:hover {
+    color: #ff004f;
+  }
 
-/* --- LINKS --- */
+
+/* Links */
 a {
   color: #ff004f;
   text-decoration: none;
@@ -480,63 +493,314 @@ a:hover {
   color: #e60043;
 }
 
-/* --- RESPONSIVE STYLES --- */
-@media only screen and (max-width: 480px) {
-  #header { height: 65vh; }
-  .header-text { margin-top: 50%; font-size: 14px; padding: 10px 12px; text-align: center; border-radius: 6px; background: rgba(0,0,0,0.5);}
-  .header-text h1 { font-size: 24px; line-height: 1.3; }
-  .header-text p { font-size: 12px; }
 
-  nav .fa-solid { font-size: 22px; }
-  nav ul { width: 220px; padding-top: 55px; }
-  nav ul li a { font-size: 16px; padding-left: 15px; }
+/* --- MOBILE OPTIMIZATION --- */
+@media only screen and (max-width: 480zpx) {
+  /* Header */
+  #header {
+    background-size: cover;
+    background-position: center;
+    height: 65vh;
+  }
 
-  .row { flex-direction: column; align-items: center; }
-  .about-col-1 img { width: 80%; }
-  .sub-title { font-size: 28px; margin-bottom: 12px; }
-  .about-col-2 { font-size: 13px; }
-  .tab-links { font-size: 13px; margin-right: 12px; }
+  .header-text {
+    margin-top: 50%;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-  .project-card { flex: 0 0 90%; margin: 12px auto; }
-  .project-card img { height: 140px; }
+  .header-text h1 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
 
-  .contact-left, .contact-right { flex-basis: 100%; text-align: center; margin-bottom: 15px; }
-  .contact-left p, form input, form textarea { font-size: 13px; padding: 10px; }
-  .btn { padding: 8px 20px; font-size: 13px; }
-  .social-icons a { font-size: 24px; margin: 8px; }
-  #scroll-top { width: 38px; height: 38px; font-size: 15px; }
-  footer { font-size: 0.85em; }
+  .header-text p {
+    font-size: 12px;
+  }
+
+  /* Navigation */
+  nav .fa-solid {
+    font-size: 22px;
+  }
+
+  nav ul {
+    width: 220px;
+    padding-top: 55px;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+    padding-left: 15px;
+  }
+
+  /* About Section */
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-col-1 img {
+    width: 80%;
+  }
+
+  .sub-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .about-col-2 {
+    font-size: 13px;
+  }
+
+  .tab-links {
+    font-size: 13px;
+    margin-right: 12px;
+  }
+
+  /* Projects Section */
+  .project-card {
+    flex: 0 0 90%;
+    margin: 12px auto;
+  }
+
+  .project-card img {
+    height: 140px;
+  }
+
+  /* Contact Section */
+  .contact-left,
+  .contact-right {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .contact-left p,
+  form input,
+  form textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .social-icons a {
+    font-size: 24px;
+    margin: 8px;
+  }
+
+  /* Scroll-to-top */
+  #scroll-top {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  /* Footer */
+  footer {
+    font-size: 0.85em;
+  }
 }
 
+ /* --- Tablets / Small Laptops --- */
 @media only screen and (max-width: 768px) {
-  #header { height: 60vh; }
-  .header-text { margin-top: 28%; font-size: 16px; padding: 12px 15px; border-radius: 8px; text-align: center; background: rgba(0,0,0,0.5);}
-  .header-text h1 { font-size: 24px; line-height: 1.4; }
-  .header-text p { font-size: 14px; }
+  /* Header */
+  #header {
+    background-size: cover;
+    background-position: center;
+    height: 60vh; /* slightly shorter for better mobile fit */
+  }
 
-  nav .fa-solid { display: block; font-size: 25px; color: #fff; z-index: 1100; cursor: pointer; }
-  nav ul { position: fixed; top: 0; right: -250px; width: 250px; height: 100vh; background: #1e1e1e; flex-direction: column; align-items: flex-start; padding-top: 60px; transition: right 0.4s ease; box-shadow: -4px 0 10px rgba(0,0,0,0.5); z-index:1050;}
-  nav ul li { width: 100%; margin: 18px 0; }
-  nav ul li a { font-size: 18px; padding-left: 20px; display: block; width: 100%; }
-  nav ul #menu-close { position: absolute; top: 20px; left: 20px; font-size: 28px; color: #ff004f; cursor: pointer; }
+  .header-text {
+    margin-top: 28%;
+    font-size: 16px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-  .row { flex-direction: column; align-items: center; }
-  .about-col-1, .about-col-2 { flex-basis: 100%; text-align: center; }
-  .about-col-1 img { width: 90%; max-width: 250px; margin: 15px auto; display: block; border-radius: 8px; }
-  .sub-title { font-size: 28px; margin-bottom: 12px; }
-  .about-col-2 { font-size: 14px; }
-  .tab-links { font-size: 14px; margin-right: 12px; }
-  .tab-contents { padding: 10px; }
+  .header-text h1 {
+    font-size: 24px;
+    line-height: 1.4;
+  }
 
-  .project-card { flex: 0 0 90%; margin: 15px auto; }
-  .project-card img { width: 100%; height: auto; border-radius: 6px; }
-  .slider-controls button { font-size: 20px; padding: 8px 12px; }
+  .header-text p {
+    font-size: 14px;
+  }
 
-  .contact-left, .contact-right { flex-basis: 100%; text-align: center; margin-bottom: 20px; }
-  .contact-left p { font-size: 14px; margin: 6px 0; }
-  .social-icons a { font-size: 28px; margin: 8px; }
-  form input, form textarea { font-size: 14px; padding: 12px; width: 100%; margin-bottom: 12px; }
-  .btn { padding: 10px 25px; font-size: 14px; }
+  /* Navigation */
+  nav .fa-solid {
+    display: block;
+    font-size: 25px;
+    color: #fff;
+    z-index: 1100;
+    cursor: pointer;
+  }
 
-  #scroll-top { width: 40px; height: 40px; font-size: 16px; bottom: 20px; right: 20px; }
+  nav ul {
+    background: #1e1e1e;
+    position: fixed;
+    top: 0;
+    right: -250px; 
+    width: 250px;
+    height: 100vh;
+    padding-top: 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: right 0.4s ease;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+
+  nav ul li {
+    width: 100%;
+    margin: 18px 0;
+  }
+
+  nav ul li a {
+    font-size: 18px;
+    color: #fff;
+    padding-left: 20px;
+    display: block;
+    width: 100%;
+  }
+
+  nav ul #menu-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    color: #ff004f;
+    cursor: pointer;
+  }
+
+  /* About Section */
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-col-1,
+  .about-col-2 {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .about-col-1 img {
+    width: 90%;
+    max-width: 250px;
+    margin: 15px auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .sub-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .about-col-2 {
+    font-size: 14px;
+  }
+
+  .tab-links {
+    font-size: 14px;
+    margin-right: 12px;
+  }
+
+  .tab-contents {
+    padding: 10px;
+  }
+
+  /* Projects Section */
+  .project-card {
+    flex: 0 0 90%;
+    margin: 15px auto;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .slider-controls button {
+    font-size: 20px;
+    padding: 8px 12px;
+  }
+
+  /* Contact Section */
+  .contact-left,
+  .contact-right {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contact-left p {
+    font-size: 14px;
+    margin: 6px 0;
+  }
+
+  .social-icons a {
+    font-size: 28px;
+    margin: 8px;
+  }
+
+  form input,
+  form textarea {
+    font-size: 14px;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  /* Scroll-to-top button */
+  #scroll-top {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(43, 125, 143, 0.2);
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  footer a {
+    color: #d10000;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: #ff004f;
+  }
+}
+
+/* Links */
+a {
+  color: #ff004f;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e60043;
 }
