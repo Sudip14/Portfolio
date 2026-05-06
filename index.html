@@ -1,216 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Sudip Bhasima's Portfolio | Web Developer, BCA Student from Nepal. Explore my projects, skills, and contact details." />
-  <meta name="keywords"
-    content="Sudip Bhasima, PHP developer, BCA student, portfolio, backend projects, emotional storytelling">
-  <title>Sudip Bhasima | Portfolio</title>
+  <meta name="description" content="Sudip Bhasima — Full-Stack Developer from Nepal. Building the future of web." />
+  <meta name="theme-color" content="#050508" />
+  <title>Sudip Bhasima | Future Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous" defer></script>
+<base target="_blank">
 </head>
 
 <body>
+  <!-- Particle Canvas Background -->
+  <canvas id="particle-canvas" class="particle-canvas"></canvas>
 
-  <!-- Header -->
-  <header id="header">
-    <div class="container">
-      <nav>
-        <h4 class="logo">
-          <a href="index.html"><img src="favicon.png" alt="Sudip Bhasima" /></a>
-        </h4>
-        <ul id="sidemenu">
-          <li><a href="#header">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <i class="fa-solid fa-circle-xmark" id="menu-close"></i>
-        </ul>
-        <i class="fa-solid fa-bars" id="menu-open"></i>
-      </nav>
-      <div class="header-text">
-        <p>Frontend & Backend Developer | BCA Student</p>
-        <h1>Hi, I'm <span>Sudip Bhasima</span><br>from Nepal</h1>
+  <!-- Scanline Overlay -->
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Glitch Overlay -->
+  <div class="glitch-overlay" id="glitch-overlay"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-core"></div>
+  <div class="cursor-ring"></div>
+  <div class="cursor-trail" id="cursor-trail"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-future" id="nav-future">
+    <div class="nav-hud">
+      <a href="#" class="nav-brand">
+        <span class="brand-icon">◈</span>
+        <span class="brand-text" data-text="SUDIP">SUDIP</span>
+        <span class="brand-tag">.SYS</span>
+      </a>
+
+      <div class="nav-status">
+        <span class="status-indicator online"></span>
+        <span class="status-text">ONLINE</span>
+        <span class="status-divider">|</span>
+        <span class="location-text">KTM.NP</span>
+      </div>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link" data-index="01">HOME</a></li>
+        <li><a href="#about" class="nav-link" data-index="02">ABOUT</a></li>
+        <li><a href="#projects" class="nav-link" data-index="03">WORKS</a></li>
+        <li><a href="#contact" class="nav-link" data-index="04">LINK</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span class="hamburger-line hamburger-top"></span>
+        <span class="hamburger-line hamburger-mid"></span>
+        <span class="hamburger-line hamburger-bot"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-future">
+    <div class="hero-grid-bg">
+      <div class="grid-line grid-h"></div>
+      <div class="grid-line grid-h"></div>
+      <div class="grid-line grid-h"></div>
+      <div class="grid-line grid-v"></div>
+      <div class="grid-line grid-v"></div>
+      <div class="grid-line grid-v"></div>
+    </div>
+
+    <div class="hero-content-future">
+      <div class="hero-badge-future">
+        <div class="badge-pulse"></div>
+        <span class="badge-text">SYSTEM.READY</span>
+      </div>
+
+      <h1 class="hero-title-future">
+        <span class="title-line-future title-glitch" data-text="SUDIP_BHASIMA">SUDIP_BHASIMA</span>
+        <span class="title-line-future title-sub">FULL_STACK_ARCHITECT</span>
+        <span class="title-line-future title-location">NEPAL_EARTH_SECTOR_7</span>
+      </h1>
+
+      <p class="hero-desc-future">
+        <span class="typing-text" id="typing-text"></span>
+        <span class="typing-cursor">_</span>
+      </p>
+
+      <div class="hero-actions-future">
+        <a href="#projects" class="btn-future btn-primary-future">
+          <span class="btn-glow"></span>
+          <span class="btn-text">INITIATE_SEQUENCE</span>
+          <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn-future btn-secondary-future">
+          <span class="btn-text">ESTABLISH_LINK</span>
+        </a>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-value" data-count="4">0</div>
+          <div class="metric-label">PROJECTS_BUILT</div>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric">
+          <div class="metric-value" data-count="3">0</div>
+          <div class="metric-label">YEARS_ACTIVE</div>
+        </div>
+        <div class="metric-separator"></div>
+        <div class="metric">
+          <div class="metric-value metric-infinite">∞</div>
+          <div class="metric-label">LEARNING_MODE</div>
+        </div>
       </div>
     </div>
-  </header>
+
+    <div class="hero-visual">
+      <div class="hologram-container">
+        <div class="hologram-ring ring-1"></div>
+        <div class="hologram-ring ring-2"></div>
+        <div class="hologram-ring ring-3"></div>
+        <div class="hologram-core">
+          <img src="sudip3.jpeg" alt="Sudip Bhasima" class="hologram-img" />
+        </div>
+        <div class="hologram-scan"></div>
+        <div class="hologram-data">
+          <div class="data-line">ID: SUDIP_001</div>
+          <div class="data-line">CLASS: DEVELOPER</div>
+          <div class="data-line">STATUS: OPERATIONAL</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-prompt">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">SCROLL_TO_NAVIGATE</span>
+    </div>
+  </section>
 
   <!-- About Section -->
-  <section id="about">
-    <div class="container row">
-      <div class="about-col-1">
-        <img src="sudip3.jpeg" alt="Sudip Bhasima">
+  <section id="about" class="about-future">
+    <div class="section-container-future">
+      <div class="section-header-future">
+        <div class="header-line"></div>
+        <span class="section-tag-future">MODULE_01</span>
+        <h2 class="section-title-future">
+          <span class="title-bracket">[</span>
+          SYSTEM_PROFILE
+          <span class="title-bracket">]</span>
+        </h2>
       </div>
-      <div class="about-col-2">
-        <h1 class="sub-title">About Me</h1>
-        <p>
-          I'm <strong>Sudip Bhasima</strong>, a BCA student and passionate web developer from Kathmandu, Nepal.
-          I enjoy creating responsive and user-friendly websites using
-          <strong>HTML, CSS, JavaScript, PHP, and MySQL</strong>.
-          I love learning new technologies and improving my skills to build innovative and effective web solutions.
-        </p>
 
-        <!-- Tab Menu -->
-        <div class="tab-titles">
-          <p class="tab-links active-link" onclick="opentab('skills', event)">Skills</p>
-          <p class="tab-links" onclick="opentab('education', event)">Education</p>
-        </div>
-
-        <!-- Skills -->
-        <div class="tab-contents active-tab" id="skills">
-          <div class="skills-container">
-            <div class="skills-box">
-              <h3>Technical Skills</h3>
-              <ul>
-                <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
-                <li><strong>Backend:</strong> PHP, MySQL</li>
-                <li><strong>Tools:</strong> Git, VS Code, XAMPP</li>
-                <li><strong>Languages:</strong> Python</li>
-                <li><strong>Currently Learning:</strong> React, Django</li>
-              </ul>
+      <div class="about-layout">
+        <div class="about-terminal">
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="terminal-title">sudip@neptune:~</span>
             </div>
-            <div class="skills-box">
-              <h3>Soft Skills</h3>
-              <ul>
-                <li>Communication</li>
-                <li>Teamwork</li>
-                <li>Adaptability</li>
-                <li>Problem Solving</li>
-              </ul>
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">whoami</span>
+              </div>
+              <div class="terminal-output">sudip_bhasima — full_stack_developer</div>
+              <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">cat location.txt</span>
+              </div>
+              <div class="terminal-output">Kathmandu, Nepal // 27.7172° N, 85.3240° E</div>
+              <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">ls skills/</span>
+              </div>
+              <div class="terminal-output">
+                <span class="file-tag">html</span>
+                <span class="file-tag">css</span>
+                <span class="file-tag">js</span>
+                <span class="file-tag">php</span>
+                <span class="file-tag">mysql</span>
+                <span class="file-tag">python</span>
+              </div>
+              <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command cursor-blink">_</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Education -->
-        <div class="tab-contents" id="education">
-          <ul>
-            <li><span>2026 (Expected)</span><br>BCA from Milton International College</li>
-            <li><span>2019</span><br>+2 from Seabird International College</li>
-            <li><span>2017</span><br>SEE from Prime Academy</li>
-          </ul>
+        <div class="about-skills-future">
+          <h3 class="skills-header">CORE_COMPETENCIES</h3>
+
+          <div class="skill-node" data-skill="95">
+            <div class="skill-node-ring">
+              <svg viewBox="0 0 100 100">
+                <circle class="skill-track" cx="50" cy="50" r="45"/>
+                <circle class="skill-fill" cx="50" cy="50" r="45"/>
+              </svg>
+              <div class="skill-percent">95%</div>
+            </div>
+            <span class="skill-node-name">HTML/CSS</span>
+          </div>
+
+          <div class="skill-node" data-skill="88">
+            <div class="skill-node-ring">
+              <svg viewBox="0 0 100 100">
+                <circle class="skill-track" cx="50" cy="50" r="45"/>
+                <circle class="skill-fill" cx="50" cy="50" r="45"/>
+              </svg>
+              <div class="skill-percent">88%</div>
+            </div>
+            <span class="skill-node-name">JAVASCRIPT</span>
+          </div>
+
+          <div class="skill-node" data-skill="82">
+            <div class="skill-node-ring">
+              <svg viewBox="0 0 100 100">
+                <circle class="skill-track" cx="50" cy="50" r="45"/>
+                <circle class="skill-fill" cx="50" cy="50" r="45"/>
+              </svg>
+              <div class="skill-percent">82%</div>
+            </div>
+            <span class="skill-node-name">PHP/MYSQL</span>
+          </div>
+
+          <div class="skill-node" data-skill="75">
+            <div class="skill-node-ring">
+              <svg viewBox="0 0 100 100">
+                <circle class="skill-track" cx="50" cy="50" r="45"/>
+                <circle class="skill-fill" cx="50" cy="50" r="45"/>
+              </svg>
+              <div class="skill-percent">75%</div>
+            </div>
+            <span class="skill-node-name">PYTHON</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="education-matrix">
+        <h3 class="matrix-header">EDUCATION_LOG</h3>
+        <div class="matrix-grid">
+          <div class="matrix-card">
+            <div class="matrix-glow"></div>
+            <div class="matrix-year">2026</div>
+            <div class="matrix-title">BCA_DEGREE</div>
+            <div class="matrix-sub">Milton International College</div>
+            <div class="matrix-status pending">PENDING</div>
+          </div>
+          <div class="matrix-card">
+            <div class="matrix-glow"></div>
+            <div class="matrix-year">2019</div>
+            <div class="matrix-title">HIGHER_SECONDARY</div>
+            <div class="matrix-sub">Seabird International College</div>
+            <div class="matrix-status complete">COMPLETE</div>
+          </div>
+          <div class="matrix-card">
+            <div class="matrix-glow"></div>
+            <div class="matrix-year">2017</div>
+            <div class="matrix-title">SECONDARY_EDU</div>
+            <div class="matrix-sub">Prime Academy</div>
+            <div class="matrix-status complete">COMPLETE</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="project-title">My Projects</h2>
-
-      <!-- Filter Buttons -->
-      <div class="filter-btns">
-        <button onclick="filterProjects('all')">All</button>
-        <button onclick="filterProjects('php')">PHP</button>
-        <button onclick="filterProjects('python')">Python</button>
-        <button onclick="filterProjects('frontend')">Frontend</button>
+  <!-- Projects Section -->
+  <section id="projects" class="projects-future">
+    <div class="section-container-future">
+      <div class="section-header-future">
+        <div class="header-line"></div>
+        <span class="section-tag-future">MODULE_02</span>
+        <h2 class="section-title-future">
+          <span class="title-bracket">[</span>
+          DEPLOYED_WORKS
+          <span class="title-bracket">]</span>
+        </h2>
       </div>
 
-      <!-- Project Slider -->
-      <div class="project-slider">
-        <div class="project-list" id="project-list">
-          <div class="project-card php">
-            <a href="BBMS/bbms.html">
-              <h3>Blood Bank Management</h3>
-              <img src="BBMS/Landing_page.png" alt="Blood Bank">
-              <p>Manage donations & blood stock. Built with PHP & MySQL.</p>
-            </a>
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">
+          <span class="filter-dot"></span>
+          ALL_SYSTEMS
+        </button>
+        <button class="filter-btn" data-filter="php">
+          <span class="filter-dot"></span>
+          PHP_CORE
+        </button>
+        <button class="filter-btn" data-filter="python">
+          <span class="filter-dot"></span>
+          PYTHON_UNIT
+        </button>
+        <button class="filter-btn" data-filter="frontend">
+          <span class="filter-dot"></span>
+          FRONTEND
+        </button>
+      </div>
+
+      <div class="projects-constellation" id="projects-constellation">
+        <article class="project-orb php" data-category="php">
+          <div class="orb-glow"></div>
+          <div class="orb-content">
+            <div class="orb-image">
+              <img src="BBMS/Landing_page.png" alt="Blood Bank" loading="lazy" />
+              <div class="orb-scan"></div>
+            </div>
+            <div class="orb-meta">
+              <div class="orb-tags">
+                <span class="orb-tag">PHP</span>
+                <span class="orb-tag">MYSQL</span>
+              </div>
+              <h3 class="orb-title">BLOOD_BANK_MGMT</h3>
+              <p class="orb-desc">Donor tracking & blood stock management system with admin dashboard.</p>
+              <a href="BBMS/bbms.html" class="orb-link">
+                <span>ACCESS_SYSTEM</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="project-card frontend">
-            <a href="index.html">
-              <h3>Portfolio Website</h3>
-              <img src="Portfolio/landing.png" alt="Portfolio">
-              <p>Responsive portfolio built with HTML, CSS, JS.</p>
-            </a>
+        </article>
+
+        <article class="project-orb frontend" data-category="frontend">
+          <div class="orb-glow"></div>
+          <div class="orb-content">
+            <div class="orb-image">
+              <img src="Portfolio/landing.png" alt="Portfolio" loading="lazy" />
+              <div class="orb-scan"></div>
+            </div>
+            <div class="orb-meta">
+              <div class="orb-tags">
+                <span class="orb-tag">HTML</span>
+                <span class="orb-tag">CSS</span>
+                <span class="orb-tag">JS</span>
+              </div>
+              <h3 class="orb-title">PORTFOLIO_V2</h3>
+              <p class="orb-desc">Personal portfolio with responsive design and contact integration.</p>
+              <a href="index.html" class="orb-link">
+                <span>ACCESS_SYSTEM</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="project-card php">
-            <a href="pharmacy.html">
-              <h3>Online Pharmacy</h3>
-              <img src="images/pharmacy.png" alt="Pharmacy">
-              <p>Pharmacy system with user & admin control (PHP).</p>
-            </a>
+        </article>
+
+        <article class="project-orb php" data-category="php">
+          <div class="orb-glow"></div>
+          <div class="orb-content">
+            <div class="orb-image">
+              <img src="images/pharmacy.png" alt="Pharmacy" loading="lazy" />
+              <div class="orb-scan"></div>
+            </div>
+            <div class="orb-meta">
+              <div class="orb-tags">
+                <span class="orb-tag">PHP</span>
+                <span class="orb-tag">MYSQL</span>
+              </div>
+              <h3 class="orb-title">PHARMA_NET</h3>
+              <p class="orb-desc">Online pharmacy with user & admin control panels.</p>
+              <a href="pharmacy.html" class="orb-link">
+                <span>ACCESS_SYSTEM</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="project-card python">
-            <a href="python/BeginnerProjects.html">
-              <h3>Terminal-Based Python Projects</h3>
-              <img src="python/calculator.png" alt="python">
-              <p>Collection of command-line Python apps to practice logic & input handling.</p>
+        </article>
+
+        <article class="project-orb python" data-category="python">
+          <div class="orb-glow"></div>
+          <div class="orb-content">
+            <div class="orb-image">
+              <img src="python/calculator.png" alt="Python" loading="lazy" />
+              <div class="orb-scan"></div>
+            </div>
+            <div class="orb-meta">
+              <div class="orb-tags">
+                <span class="orb-tag">PYTHON</span>
+                <span class="orb-tag">CLI</span>
+              </div>
+              <h3 class="orb-title">TERMINAL_OPS</h3>
+              <p class="orb-desc">Command-line tools: calculator, password gen, todo manager.</p>
+              <a href="python/BeginnerProjects.html" class="orb-link">
+                <span>ACCESS_SYSTEM</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-future">
+    <div class="section-container-future">
+      <div class="section-header-future">
+        <div class="header-line"></div>
+        <span class="section-tag-future">MODULE_03</span>
+        <h2 class="section-title-future">
+          <span class="title-bracket">[</span>
+          TRANSMISSION_LINK
+          <span class="title-bracket">]</span>
+        </h2>
+      </div>
+
+      <div class="contact-interface">
+        <div class="interface-panel">
+          <div class="panel-header">
+            <span class="panel-id">COMMS_01</span>
+            <div class="panel-signal">
+              <span class="signal-bar"></span>
+              <span class="signal-bar"></span>
+              <span class="signal-bar"></span>
+              <span class="signal-bar"></span>
+            </div>
+          </div>
+
+          <div class="contact-channels">
+            <a href="mailto:bhasimasudeep05@gmail.com" class="channel">
+              <div class="channel-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="channel-data">
+                <span class="channel-label">EMAIL_CHANNEL</span>
+                <span class="channel-value">bhasimasudeep05@gmail.com</span>
+              </div>
+              <div class="channel-status active">ACTIVE</div>
+            </a>
+
+            <a href="tel:+9779866443370" class="channel">
+              <div class="channel-icon">
+                <i class="fa-solid fa-signal"></i>
+              </div>
+              <div class="channel-data">
+                <span class="channel-label">VOICE_CHANNEL</span>
+                <span class="channel-value">+977_9866443370</span>
+              </div>
+              <div class="channel-status active">ACTIVE</div>
+            </a>
+
+            <div class="channel">
+              <div class="channel-icon">
+                <i class="fa-solid fa-location-crosshairs"></i>
+              </div>
+              <div class="channel-data">
+                <span class="channel-label">COORDINATES</span>
+                <span class="channel-value">Kathmandu_Nepal</span>
+              </div>
+              <div class="channel-status">FIXED</div>
+            </div>
+          </div>
+
+          <div class="social-matrix">
+            <a href="https://facebook.com/TheKing.Sudip/" target="_blank" class="social-node" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+              <span class="node-label">FB</span>
+            </a>
+            <a href="https://instagram.com/sudipbhasima/" target="_blank" class="social-node" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+              <span class="node-label">IG</span>
+            </a>
+            <a href="https://linkedin.com/in/sudipbhasima/" target="_blank" class="social-node" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+              <span class="node-label">LI</span>
+            </a>
+            <a href="https://github.com/sudip14" target="_blank" class="social-node" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+              <span class="node-label">GH</span>
             </a>
           </div>
         </div>
 
-        <!-- Controls -->
-        <div class="slider-controls">
-          <button onclick="prevSlide()">❮</button>
-          <button onclick="nextSlide()">❯</button>
-          <div class="project-dots" id="project-dots"></div>
+        <div class="transmission-form">
+          <div class="form-header">
+            <span class="form-id">TX_FORM_01</span>
+            <div class="form-encrypt">
+              <i class="fa-solid fa-lock"></i>
+              <span>ENCRYPTED</span>
+            </div>
+          </div>
+
+          <form id="contact-form-future" novalidate>
+            <div class="input-field">
+              <input type="text" id="tx-name" name="name" placeholder=" " required />
+              <label for="tx-name">OPERATOR_ID</label>
+              <div class="input-line"></div>
+              <div class="input-glow"></div>
+            </div>
+
+            <div class="input-field">
+              <input type="email" id="tx-email" name="email" placeholder=" " required />
+              <label for="tx-email">COMM_ADDRESS</label>
+              <div class="input-line"></div>
+              <div class="input-glow"></div>
+            </div>
+
+            <div class="input-field">
+              <textarea id="tx-message" name="message" rows="4" placeholder=" " required></textarea>
+              <label for="tx-message">TRANSMISSION_DATA</label>
+              <div class="input-line"></div>
+              <div class="input-glow"></div>
+            </div>
+
+            <button type="submit" class="transmit-btn">
+              <div class="btn-pulse"></div>
+              <span class="transmit-text">TRANSMIT_SIGNAL</span>
+              <span class="transmit-loading" hidden>
+                <svg class="transmit-spinner" width="16" height="16" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+                ENCODING...
+              </span>
+            </button>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-   
-<!-- Contact -->
-<section id="contact">
-  <div class="container row">
-    <div class="contact-left">
-      <h1 class="sub-title">Contact Me</h1>
-      <p><i class="fa-solid fa-paper-plane"></i> bhasimasudeep05@gmail.com</p>
-      <p><i class="fa-solid fa-phone"></i> +977 9866443370</p>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/TheKing.Sudip/" aria-label="Facebook Profile"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://www.instagram.com/sudipbhasima/" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/sudipbhasima/" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+  <!-- Footer -->
+  <footer class="footer-future">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-icon">◈</span>
+        <span>SUDIP.SYS</span>
       </div>
-      <a href="Resume.pdf" download class="btn btn2">📄 Download CV</a>
+      <div class="footer-coords">
+        <span>27.7172°N</span>
+        <span class="coord-divider">×</span>
+        <span>85.3240°E</span>
+      </div>
+      <div class="footer-copy">
+        <span id="footer-year">2025</span>
+        <span class="copy-divider">//</span>
+        <span>ALL_SYSTEMS_NOMINAL</span>
+      </div>
     </div>
-    <div class="contact-right">
-      <form id="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn2">Send Message</button>
-      </form>
+    <div class="footer-scan"></div>
+  </footer>
 
-      <!-- EmailJS SDK -->
-      <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-      <script>
-        // Initialize EmailJS
-        emailjs.init("QdlqQtJQWOfHJmWIq"); // replace with your EmailJS public key
+  <button class="warp-home" id="warp-home" aria-label="Return to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
 
-        const contactForm = document.getElementById("contact-form");
-        contactForm.addEventListener("submit", function(e) {
-          e.preventDefault();
-
-          emailjs.sendForm("service_yvzbmub", "template_048g9pv", this)
-            .then(() => {
-              alert("✅ Message sent successfully!");
-              this.reset(); // clear the form
-            }, (err) => {
-              alert("❌ Failed to send message: " + JSON.stringify(err));
-            });
-        });
-      </script>
-    </div>
-  </div>
-</section>
-
-<!-- Scroll-to-top -->
-<button aria-label="Scroll to top" id="scroll-top" onclick="scrollToTop()">
-  <i class="fa-solid fa-arrow-up"></i>
-</button>
-
-<footer>
-  <p>© 2025 Sudip Bhasima. <a href="https://github.com/sudip14" target="_blank" rel="noopener noreferrer">GitHub Profile</a></p>
-</footer>
-
-<!-- Main JS file -->
-<script src="script.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
