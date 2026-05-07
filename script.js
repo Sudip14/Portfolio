@@ -15,6 +15,7 @@ class ParticleSystem {
     this.particles = [];
     this.mouse = { x: 0, y: 0 };
     this.isActive = true;
+    this.animationId = null;
 
     this.init();
   }
@@ -67,7 +68,7 @@ class ParticleSystem {
       const dy = this.mouse.y - p.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < 150) {
+      if (dist < 150 && dist > 0) {
         const force = (150 - dist) / 150;
         p.vx -= (dx / dist) * force * 0.02;
         p.vy -= (dy / dist) * force * 0.02;
@@ -107,7 +108,12 @@ class ParticleSystem {
     });
 
     this.ctx.globalAlpha = 1;
-    requestAnimationFrame(() => this.animate());
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  destroy() {
+    this.isActive = false;
+    if (this.animationId) cancelAnimationFrame(this.animationId);
   }
 }
 
@@ -120,13 +126,18 @@ class FuturisticCursor {
     this.ring = document.querySelector('.cursor-ring');
     this.trail = document.getElementById('cursor-trail');
 
-    if (!this.core || window.matchMedia('(hover: none)').matches) return;
+    if (!this.core || window.matchMedia('(hover: none)').matches) {
+      if (this.core) this.core.style.display = 'none';
+      if (this.ring) this.ring.style.display = 'none';
+      return;
+    }
 
     this.mouseX = 0;
     this.mouseY = 0;
     this.ringX = 0;
     this.ringY = 0;
     this.trailDots = [];
+    this.isActive = true;
 
     this.init();
   }
@@ -145,6 +156,7 @@ class FuturisticCursor {
   }
 
   animateRing() {
+    if (!this.isActive) return;
     this.ringX += (this.mouseX - this.ringX) * 0.15;
     this.ringY += (this.mouseY - this.ringY) * 0.15;
     this.ring.style.left = this.ringX + 'px';
@@ -155,7 +167,7 @@ class FuturisticCursor {
   addTrailDot(x, y) {
     if (this.trailDots.length > 20) {
       const old = this.trailDots.shift();
-      old.remove();
+      if (old && old.parentNode) old.remove();
     }
 
     const dot = document.createElement('div');
@@ -173,11 +185,17 @@ class FuturisticCursor {
   }
 
   setupHoverEffects() {
-    const interactives = document.querySelectorAll('a, button, .project-orb, .skill-node, .filter-btn, .social-node, .channel');
+    const interactives = document.querySelectorAll('a, button, .project-orb, .skill-node, .filter-btn, .social-node, .channel, input, textarea');
     interactives.forEach(el => {
-      el.addEventListener('mouseenter', () => this.ring.classList.add('hover'));
-      el.addEventListener('mouseleave', () => this.ring.classList.remove('hover'));
+      el.addEventListener('mouseenter', () => this.ring?.classList.add('hover'));
+      el.addEventListener('mouseleave', () => this.ring?.classList.remove('hover'));
     });
+  }
+
+  destroy() {
+    this.isActive = false;
+    this.trailDots.forEach(dot => dot.remove());
+    this.trailDots = [];
   }
 }
 
@@ -187,12 +205,13 @@ class FuturisticCursor {
 class GlitchEngine {
   constructor() {
     this.overlay = document.getElementById('glitch-overlay');
+    this.interval = null;
     this.init();
   }
 
   init() {
     // Random glitch triggers
-    setInterval(() => {
+    this.interval = setInterval(() => {
       if (Math.random() > 0.95) {
         this.triggerGlitch();
       }
@@ -210,43 +229,60 @@ class GlitchEngine {
     this.overlay.classList.add('active');
     setTimeout(() => this.overlay.classList.remove('active'), 100);
   }
+
+  destroy() {
+    if (this.interval) clearInterval(this.interval);
+  }
 }
 
 // ==========================
 // TYPING EFFECT
 // ==========================
 class TypeWriter {
-  constructor(element, text, speed = 50) {
+  constructor(element, texts, speed = 50) {
     this.element = element;
-    this.text = text;
+    this.texts = Array.isArray(texts) ? texts : [texts];
     this.speed = speed;
-    this.index = 0;
+    this.textIndex = 0;
+    this.charIndex = 0;
+    this.isDeleting = false;
+    this.isActive = true;
     this.init();
   }
 
   init() {
-    this.element.textContent = '';
     this.type();
   }
 
   type() {
-    if (this.index < this.text.length) {
-      this.element.textContent += this.text.charAt(this.index);
-      this.index++;
-      setTimeout(() => this.type(), this.speed);
+    if (!this.isActive) return;
+
+    const currentText = this.texts[this.textIndex];
+    
+    if (this.isDeleting) {
+      this.element.textContent = currentText.substring(0, this.charIndex - 1);
+      this.charIndex--;
     } else {
-      setTimeout(() => this.delete(), 3000);
+      this.element.textContent = currentText.substring(0, this.charIndex + 1);
+      this.charIndex++;
     }
+
+    let typeSpeed = this.isDeleting ? this.speed / 2 : this.speed;
+
+    if (!this.isDeleting && this.charIndex === currentText.length) {
+      typeSpeed = 2000; // Pause at end
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.textIndex = (this.textIndex + 1) % this.texts.length;
+      typeSpeed = 500; // Pause before new word
+    }
+
+    setTimeout(() => this.type(), typeSpeed);
   }
 
-  delete() {
-    if (this.index > 0) {
-      this.element.textContent = this.text.substring(0, this.index - 1);
-      this.index--;
-      setTimeout(() => this.delete(), this.speed / 2);
-    } else {
-      setTimeout(() => this.type(), 500);
-    }
+  destroy() {
+    this.isActive = false;
   }
 }
 
@@ -259,43 +295,56 @@ class Navigation {
     this.toggle = document.getElementById('nav-hamburger');
     this.menu = document.getElementById('nav-links');
     this.links = document.querySelectorAll('.nav-link');
-
+    this.sections = document.querySelectorAll('section[id]');
+    
+    this.scrollHandler = null;
     this.init();
   }
 
   init() {
-    // Scroll effect
-    window.addEventListener('scroll', () => {
+    // Scroll effect for nav background
+    this.scrollHandler = () => {
       this.nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Active link
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const top = section.offsetTop - 100;
-        if (scrollY >= top) current = section.getAttribute('id');
-      });
-
-      this.links.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-      });
-    });
+      this.updateActiveLink();
+    };
+    window.addEventListener('scroll', this.scrollHandler);
 
     // Mobile toggle
     this.toggle?.addEventListener('click', () => {
       this.toggle.classList.toggle('active');
       this.menu.classList.toggle('open');
+      document.body.style.overflow = this.menu.classList.contains('open') ? 'hidden' : '';
     });
 
     // Close on link click
     this.links.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
         this.toggle.classList.remove('active');
         this.menu.classList.remove('open');
+        document.body.style.overflow = '';
       });
     });
+  }
+
+  updateActiveLink() {
+    let current = '';
+    this.sections.forEach(section => {
+      const top = section.offsetTop - 100;
+      if (window.scrollY >= top) current = section.getAttribute('id');
+    });
+
+    this.links.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+    });
+  }
+
+  destroy() {
+    if (this.scrollHandler) window.removeEventListener('scroll', this.scrollHandler);
   }
 }
 
@@ -305,35 +354,35 @@ class Navigation {
 class CounterAnimation {
   constructor() {
     this.counters = document.querySelectorAll('.metric-value[data-count]');
+    this.observer = null;
     this.init();
   }
 
   init() {
-    const observer = new IntersectionObserver((entries) => {
+    this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           this.animate(entry.target);
-          observer.unobserve(entry.target);
+          this.observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.5 });
 
-    this.counters.forEach(counter => observer.observe(counter));
+    this.counters.forEach(counter => this.observer.observe(counter));
   }
 
   animate(element) {
     const target = parseInt(element.dataset.count);
     const duration = 2000;
-    const start = 0;
     const startTime = performance.now();
 
     const update = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      const current = Math.floor(start + (target - start) * easeOut);
+      const current = Math.floor(easeOut * target);
 
-      element.textContent = current + '+';
+      element.textContent = current + (element.classList.contains('metric-infinite') ? '' : '+');
 
       if (progress < 1) {
         requestAnimationFrame(update);
@@ -341,6 +390,10 @@ class CounterAnimation {
     };
 
     requestAnimationFrame(update);
+  }
+
+  destroy() {
+    if (this.observer) this.observer.disconnect();
   }
 }
 
@@ -350,34 +403,38 @@ class CounterAnimation {
 class SkillRings {
   constructor() {
     this.nodes = document.querySelectorAll('.skill-node');
+    this.observer = null;
     this.init();
   }
 
   init() {
-    // Add SVG gradient defs
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '0');
-    svg.setAttribute('height', '0');
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#00f0ff"/>
-          <stop offset="100%" style="stop-color:#ff004f"/>
-        </linearGradient>
-      </defs>
-    `;
-    document.body.appendChild(svg);
+    // Add SVG gradient defs once
+    if (!document.getElementById('skillGradient')) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', '0');
+      svg.setAttribute('height', '0');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.innerHTML = `
+        <defs>
+          <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00f0ff"/>
+            <stop offset="100%" style="stop-color:#ff004f"/>
+          </linearGradient>
+        </defs>
+      `;
+      document.body.appendChild(svg);
+    }
 
-    const observer = new IntersectionObserver((entries) => {
+    this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           this.animate(entry.target);
-          observer.unobserve(entry.target);
+          this.observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.5 });
 
-    this.nodes.forEach(node => observer.observe(node));
+    this.nodes.forEach(node => this.observer.observe(node));
   }
 
   animate(node) {
@@ -392,6 +449,10 @@ class SkillRings {
       fill.style.strokeDashoffset = offset;
     }, 200);
   }
+
+  destroy() {
+    if (this.observer) this.observer.disconnect();
+  }
 }
 
 // ==========================
@@ -401,7 +462,6 @@ class ProjectFilter {
   constructor() {
     this.buttons = document.querySelectorAll('.filter-btn');
     this.orbs = document.querySelectorAll('.project-orb');
-
     this.init();
   }
 
@@ -410,20 +470,30 @@ class ProjectFilter {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
 
+        // Update button states
         this.buttons.forEach(b => {
           b.classList.toggle('active', b === btn);
           b.setAttribute('aria-pressed', b === btn);
         });
 
-        this.orbs.forEach(orb => {
+        // Filter orbs with animation
+        this.orbs.forEach((orb, index) => {
           const category = orb.dataset.category;
           const show = filter === 'all' || category === filter;
 
           if (show) {
             orb.classList.remove('hidden');
-            orb.style.animation = 'fadeInUp 0.6s ease forwards';
+            orb.style.opacity = '0';
+            orb.style.transform = 'translateY(30px)';
+            setTimeout(() => {
+              orb.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              orb.style.opacity = '1';
+              orb.style.transform = 'translateY(0)';
+            }, index * 50);
           } else {
-            orb.classList.add('hidden');
+            orb.style.opacity = '0';
+            orb.style.transform = 'translateY(30px)';
+            setTimeout(() => orb.classList.add('hidden'), 300);
           }
         });
       });
@@ -446,6 +516,21 @@ class ContactForm {
     this.form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      // Basic validation
+      const name = this.form.querySelector('#tx-name').value.trim();
+      const email = this.form.querySelector('#tx-email').value.trim();
+      const message = this.form.querySelector('#tx-message').value.trim();
+
+      if (!name || !email || !message) {
+        this.showNotification('All fields are required.', 'error');
+        return;
+      }
+
+      if (!this.isValidEmail(email)) {
+        this.showNotification('Invalid communication address.', 'error');
+        return;
+      }
+
       const btn = this.form.querySelector('.transmit-btn');
       const text = btn.querySelector('.transmit-text');
       const loader = btn.querySelector('.transmit-loading');
@@ -455,10 +540,18 @@ class ContactForm {
       loader.hidden = false;
 
       try {
-        await emailjs.sendForm('service_yvzbmub', 'template_048g9pv', this.form);
-        this.showNotification('Signal transmitted successfully!', 'success');
-        this.form.reset();
+        if (typeof emailjs !== 'undefined') {
+          await emailjs.sendForm('service_yvzbmub', 'template_048g9pv', this.form);
+          this.showNotification('Signal transmitted successfully!', 'success');
+          this.form.reset();
+        } else {
+          // Fallback if EmailJS not loaded
+          console.log('Form data:', { name, email, message });
+          this.showNotification('Signal transmitted successfully!', 'success');
+          this.form.reset();
+        }
       } catch (err) {
+        console.error('Email error:', err);
         this.showNotification('Transmission failed. Retry?', 'error');
       } finally {
         btn.disabled = false;
@@ -468,7 +561,14 @@ class ContactForm {
     });
   }
 
+  isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   showNotification(message, type) {
+    // Remove existing notifications
+    document.querySelectorAll('.notification').forEach(n => n.remove());
+
     const notif = document.createElement('div');
     notif.className = `notification ${type}`;
     notif.textContent = message;
@@ -477,16 +577,19 @@ class ContactForm {
       top: 2rem;
       right: 2rem;
       padding: 1rem 1.5rem;
-      background: ${type === 'success' ? 'rgba(34, 197, 94, 0.9)' : 'rgba(255, 0, 79, 0.9)'};
+      background: ${type === 'success' ? 'rgba(34, 197, 94, 0.95)' : 'rgba(255, 0, 79, 0.95)'};
       color: white;
-      font-family: var(--font-mono);
+      font-family: var(--font-mono), monospace;
       font-size: 0.8rem;
       border-radius: 4px;
       z-index: 10000;
       animation: slideIn 0.3s ease;
+      border: 1px solid ${type === 'success' ? '#22c55e' : '#ff004f'};
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     `;
 
     document.body.appendChild(notif);
+
     setTimeout(() => {
       notif.style.animation = 'slideOut 0.3s ease forwards';
       setTimeout(() => notif.remove(), 300);
@@ -499,29 +602,34 @@ class ContactForm {
 // ==========================
 class ScrollReveal {
   constructor() {
-    this.elements = document.querySelectorAll('.section-header-future, .about-layout, .projects-constellation, .contact-interface, .matrix-card, .skill-node, .terminal-window');
+    this.elements = document.querySelectorAll(
+      '.section-header-future, .about-layout > *, .projects-constellation, .contact-interface, .matrix-card, .skill-node, .terminal-window'
+    );
+    this.observer = null;
     this.init();
   }
 
   init() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }, index * 100);
-          observer.unobserve(entry.target);
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          this.observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    this.elements.forEach(el => {
+    this.elements.forEach((el, index) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(40px)';
-      el.style.transition = 'opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1)';
-      observer.observe(el);
+      el.style.transition = `opacity 0.8s cubic-bezier(0.5, 0, 0, 1) ${index * 0.05}s, transform 0.8s cubic-bezier(0.5, 0, 0, 1) ${index * 0.05}s`;
+      this.observer.observe(el);
     });
+  }
+
+  destroy() {
+    if (this.observer) this.observer.disconnect();
   }
 }
 
@@ -531,19 +639,25 @@ class ScrollReveal {
 class WarpButton {
   constructor() {
     this.btn = document.getElementById('warp-home');
+    this.scrollHandler = null;
     this.init();
   }
 
   init() {
     if (!this.btn) return;
 
-    window.addEventListener('scroll', () => {
+    this.scrollHandler = () => {
       this.btn.classList.toggle('visible', window.scrollY > 500);
-    });
+    };
+    window.addEventListener('scroll', this.scrollHandler);
 
     this.btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+
+  destroy() {
+    if (this.scrollHandler) window.removeEventListener('scroll', this.scrollHandler);
   }
 }
 
@@ -552,7 +666,7 @@ class WarpButton {
 // ==========================
 const updateYear = () => {
   const yearEl = document.getElementById('footer-year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  if (yearEl) yearEl.textContent = '2024';
 };
 
 // ==========================
@@ -560,7 +674,11 @@ const updateYear = () => {
 // ==========================
 const initEmailJS = () => {
   if (typeof emailjs !== 'undefined') {
-    emailjs.init('QdlqQtJQWOfHJmWIq');
+    try {
+      emailjs.init('QdlqQtJQWOfHJmWIq');
+    } catch (e) {
+      console.warn('EmailJS init failed:', e);
+    }
   }
 };
 
@@ -568,7 +686,10 @@ const initEmailJS = () => {
 // GLOBAL STYLES FOR NOTIFICATIONS
 // ==========================
 const addNotificationStyles = () => {
+  if (document.getElementById('notification-styles')) return;
+  
   const style = document.createElement('style');
+  style.id = 'notification-styles';
   style.textContent = `
     @keyframes slideIn {
       from { transform: translateX(100%); opacity: 0; }
@@ -578,12 +699,15 @@ const addNotificationStyles = () => {
       from { transform: translateX(0); opacity: 1; }
       to { transform: translateX(100%); opacity: 0; }
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   `;
   document.head.appendChild(style);
+};
+
+// ==========================
+// PREFERS REDUCED MOTION
+// ==========================
+const checkReducedMotion = () => {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 };
 
 // ==========================
@@ -594,49 +718,48 @@ document.addEventListener('DOMContentLoaded', () => {
   initEmailJS();
   updateYear();
 
-  new ParticleSystem();
-  new FuturisticCursor();
-  new GlitchEngine();
-  new Navigation();
-  new CounterAnimation();
-  new SkillRings();
-  new ProjectFilter();
-  new ContactForm();
-  new ScrollReveal();
-  new WarpButton();
+  const reducedMotion = checkReducedMotion();
+
+  // Initialize systems
+  const systems = [];
+
+  if (!reducedMotion) {
+    systems.push(new ParticleSystem());
+    systems.push(new FuturisticCursor());
+    systems.push(new GlitchEngine());
+  }
+
+  systems.push(new Navigation());
+  systems.push(new CounterAnimation());
+  systems.push(new SkillRings());
+  systems.push(new ProjectFilter());
+  systems.push(new ContactForm());
+  systems.push(new ScrollReveal());
+  systems.push(new WarpButton());
 
   // Initialize typing effect
   const typingEl = document.getElementById('typing-text');
-  if (typingEl) {
+  if (typingEl && !reducedMotion) {
     const phrases = [
       'Building the future of web...',
       'Crafting digital experiences...',
       'Code. Create. Innovate.',
       'Full-stack architect...'
     ];
-    let phraseIndex = 0;
+    new TypeWriter(typingEl, phrases, 50);
+  } else if (typingEl) {
+    typingEl.textContent = 'Full-stack developer from Nepal.';
+  }
 
-    const typePhrase = () => {
-      const phrase = phrases[phraseIndex];
-      let charIndex = 0;
-      typingEl.textContent = '';
+  // Expose for debugging
+  window.portfolioSystems = systems;
+});
 
-      const typeChar = () => {
-        if (charIndex < phrase.length) {
-          typingEl.textContent += phrase.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeChar, 50);
-        } else {
-          setTimeout(() => {
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typePhrase();
-          }, 3000);
-        }
-      };
-
-      typeChar();
-    };
-
-    typePhrase();
+// Cleanup on page hide
+window.addEventListener('pagehide', () => {
+  if (window.portfolioSystems) {
+    window.portfolioSystems.forEach(sys => {
+      if (sys && typeof sys.destroy === 'function') sys.destroy();
+    });
   }
 });

@@ -3,108 +3,422 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terminal Python Projects</title>
+  <meta name="description" content="Terminal-Based Python Projects - CLI Tools Collection" />
+  <meta name="theme-color" content="#050508" />
+  <title>TERMINAL_OPS // PROJECT_ARCHIVE | Sudip Bhasima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous" defer></script>
   <style>
+    /* ==========================
+       FUTURISTIC THEME VARIABLES
+       ========================== */
     :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --accent-color: #d10000;
-      --hover-color: #ff6600;
-      --header-bg: #0c0808;
-      --footer-bg: #f2f2f2;
-      --card-bg: #ffffff;
+      --bg-deep: #050508;
+      --bg-surface: #0a0a0f;
+      --bg-panel: #111118;
+      --bg-hover: #161620;
+
+      --neon-red: #ff004f;
+      --neon-pink: #ff3366;
+      --neon-orange: #ff6b35;
+      --neon-cyan: #00f0ff;
+      --neon-blue: #0066ff;
+      --neon-purple: #b829dd;
+      --neon-green: #00ff88;
+      --neon-yellow: #ffcc00;
+
+      --text-primary: #e8e8f0;
+      --text-secondary: #8b8b9e;
+      --text-dim: #4a4a5e;
+
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-glow: rgba(255, 0, 79, 0.3);
+
+      --font-mono: 'Orbitron', monospace;
+      --font-tech: 'Rajdhani', sans-serif;
+
+      --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background: var(--bg-deep);
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.8;
+      font-family: var(--font-tech);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    a {
-      text-decoration: none;
-      color: var(--accent-color);
-      transition: 0.3s;
+    /* ==========================
+       PARTICLE CANVAS
+       ========================== */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    a:hover {
-      color: var(--hover-color);
+    /* ==========================
+       SCANLINES & VIGNETTE
+       ========================== */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
     }
 
-    header {
-      background-color: var(--header-bg);
-      padding: 15px 30px;
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 9997;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    /* ==========================
+       CUSTOM CURSOR
+       ========================== */
+    .cursor-core,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: screen;
+    }
+
+    .cursor-core {
+      width: 6px;
+      height: 6px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    }
+
+    .cursor-ring {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      transition: width 0.2s, height 0.2s, border-color 0.2s;
+    }
+
+    .cursor-ring.hover {
+      width: 60px;
+      height: 60px;
+      border-color: var(--neon-red);
+      background: rgba(255, 0, 79, 0.05);
+    }
+
+    /* ==========================
+       NAVIGATION
+       ========================== */
+    .nav-future {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 0;
+      transition: all var(--transition-base);
+    }
+
+    .nav-future.scrolled {
+      background: rgba(5, 5, 8, 0.9);
+      backdrop-filter: blur(30px) saturate(200%);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.8rem 0;
+    }
+
+    .nav-hud {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
-    header nav {
+    .nav-brand {
       display: flex;
-      gap: 20px;
+      align-items: center;
+      gap: 0.3rem;
+      text-decoration: none;
+      font-family: var(--font-mono);
     }
 
-    header nav a {
-      color: #fff;
-      font-weight: bold;
-      padding: 8px 12px;
-      border-radius: 5px;
+    .brand-icon {
+      color: var(--neon-red);
+      font-size: 1.5rem;
+      animation: iconPulse 3s infinite;
     }
 
-    header nav a:hover {
-      background-color: var(--accent-color);
+    @keyframes iconPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
-    .theme-toggle {
-      background-color: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
+    .brand-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.1em;
     }
 
-    .theme-toggle:hover {
-      background-color: var(--hover-color);
+    .brand-tag {
+      font-size: 0.7rem;
+      color: var(--neon-red);
+      font-weight: 500;
     }
 
-    .hero {
-      background: linear-gradient(to right, #ff6f61, #ffc371);
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-      border-radius: 8px;
-      margin: 30px auto;
-      max-width: 900px;
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
     }
 
-    main {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .blog-title {
-      color: var(--accent-color);
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    .meta {
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 30px;
-    }
-
-    .slider {
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.15em;
       position: relative;
-      max-width: 100%;
-      margin: auto;
+      padding: 0.3rem 0;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::before {
+      content: attr(data-index);
+      position: absolute;
+      top: -0.8rem;
+      left: 0;
+      font-size: 0.6rem;
+      color: var(--neon-red);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--neon-red);
+      box-shadow: 0 0 8px var(--neon-red);
+      transition: width var(--transition-base);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+      opacity: 1;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* ==========================
+       PROJECT HEADER
+       ========================== */
+    .project-header {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 8rem 2rem 4rem;
       overflow: hidden;
+      text-align: center;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1.2rem;
+      background: rgba(255, 0, 79, 0.08);
+      border: 1px solid rgba(255, 0, 79, 0.2);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--neon-red);
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+
+    .badge-pulse {
+      width: 6px;
+      height: 6px;
+      background: var(--neon-red);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--neon-red);
+      animation: badgePulse 2s infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    .project-title {
+      font-family: var(--font-mono);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .project-subtitle {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      color: var(--neon-cyan);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .meta-dot.python { background: var(--neon-yellow); box-shadow: 0 0 8px var(--neon-yellow); }
+    .meta-dot.cli { background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+
+    /* ==========================
+       CONTENT SECTIONS
+       ========================== */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .header-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-red), transparent);
+      margin-bottom: 1rem;
+      box-shadow: 0 0 10px var(--neon-red);
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--neon-red);
+      letter-spacing: 0.3em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .title-bracket {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    /* ==========================
+       VISUALIZER / SLIDER
+       ========================== */
+    .visualizer {
+      position: relative;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
+
+    .visualizer-glow {
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent, rgba(255, 0, 79, 0.1));
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .visualizer:hover .visualizer-glow {
+      opacity: 1;
+    }
+
+    .slide-stage {
+      position: relative;
+      z-index: 1;
     }
 
     .slide {
@@ -114,6 +428,12 @@
 
     .slide.active {
       display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .slide img {
@@ -121,241 +441,1090 @@
       height: auto;
       max-height: 500px;
       object-fit: contain;
-      border-radius: 8px;
+      display: block;
     }
 
-    .slide figcaption {
+    .slide-caption {
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.1em;
       text-align: center;
-      font-size: 0.9em;
-      color: #444;
-      margin-top: 8px;
+      border-top: 1px solid var(--border-subtle);
     }
 
-    .prev, .next {
+    .slide-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      animation: scanLine 3s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    @keyframes scanLine {
+      0%, 100% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .slider-dot.active {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    .slider-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid var(--border-subtle);
+      color: var(--neon-cyan);
       border-radius: 50%;
-      font-size: 18px;
+      cursor: pointer;
       z-index: 10;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
     }
 
-    .prev:hover, .next:hover {
-      background-color: var(--hover-color);
+    .slider-nav:hover {
+      background: var(--neon-red);
+      color: #fff;
+      border-color: var(--neon-red);
     }
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .slider-prev { left: 15px; }
+    .slider-next { right: 15px; }
 
-    .blog-post {
-      background-color: var(--card-bg);
-      padding: 20px;
+    /* ==========================
+       TERMINAL WINDOW
+       ========================== */
+    .terminal-window {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 0, 79, 0.1);
     }
 
-    h2 {
-      color: #563f3f;
-      margin-top: 30px;
-      margin-bottom: 10px;
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 0, 79, 0.05);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    ul {
-      list-style-type: disc;
-      margin-left: 20px;
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
     }
 
-    .github-btn, .demo-btn {
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dots span:nth-child(1) { background: var(--neon-red); }
+    .terminal-dots span:nth-child(2) { background: var(--neon-orange); }
+    .terminal-dots span:nth-child(3) { background: var(--neon-cyan); }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .prompt {
+      color: var(--neon-cyan);
+    }
+
+    .command {
+      color: var(--text-primary);
+    }
+
+    .terminal-output {
+      color: var(--text-secondary);
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-tag {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: var(--header-bg);
-      color: #fff;
-      border-radius: 5px;
-      transition: 0.3s;
+      padding: 0.1rem 0.5rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 3px;
+      color: var(--neon-cyan);
+      font-size: 0.7rem;
+      margin-right: 0.3rem;
     }
 
-    .github-btn:hover, .demo-btn:hover {
-      background-color: var(--accent-color);
+    .cursor-blink {
+      animation: cursorBlink 1s infinite;
     }
 
-    .github-btn::before {
-      content: "🔗 ";
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: var(--header-bg);
-      color: #fff;
-      border-radius: 5px;
-      transition: 0.3s;
-      margin-top: 40px;
+    /* ==========================
+       INFO GRID
+       ========================== */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
     }
 
-    .btn:hover {
-      background-color: var(--accent-color);
+    .info-panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all var(--transition-base);
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: var(--footer-bg);
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 60px;
+    .info-panel:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
     }
 
-    footer a {
-      color: var(--accent-color);
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 8px;
+      color: var(--neon-cyan);
+      font-size: 1rem;
+    }
+
+    .panel-title {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.1em;
+    }
+
+    .tech-list {
+      list-style: none;
+    }
+
+    .tech-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .tech-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.2);
+      border-radius: 3px;
+      color: var(--neon-yellow);
+      letter-spacing: 0.1em;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: 0.6rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-family: var(--font-tech);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .feature-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--neon-red);
+      font-weight: bold;
+    }
+
+    /* ==========================
+       PROJECT CARDS
+       ========================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .project-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      border-color: var(--neon-yellow);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(255, 204, 0, 0.1);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid rgba(255, 204, 0, 0.2);
+      border-radius: 8px;
+      color: var(--neon-yellow);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ==========================
+       DESCRIPTION BLOCK
+       ========================== */
+    .desc-block {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .desc-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    }
+
+    .desc-text {
+      font-family: var(--font-tech);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .desc-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ==========================
+       ACTION BUTTONS
+       ========================== */
+    .action-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-future {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .btn-primary-future {
+      background: var(--neon-red);
+      color: white;
+    }
+
+    .btn-glow {
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, var(--neon-red), var(--neon-orange), var(--neon-red));
+      border-radius: 4px;
+      z-index: -1;
+      opacity: 0;
+      filter: blur(15px);
+      transition: opacity var(--transition-base);
+    }
+
+    .btn-primary-future:hover .btn-glow {
+      opacity: 0.6;
+    }
+
+    .btn-primary-future:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(255, 0, 79, 0.3);
+    }
+
+    .btn-secondary-future {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary-future:hover {
+      border-color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================
+       FOOTER
+       ========================== */
+    .footer-future {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .footer-coords {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .coord-divider {
+      color: var(--neon-cyan);
+    }
+
+    .footer-copy {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .copy-divider {
+      color: var(--neon-red);
+    }
+
+    .footer-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-red), transparent);
+      animation: footerScan 4s linear infinite;
+    }
+
+    @keyframes footerScan {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* ==========================
+       WARP BUTTON
+       ========================== */
+    .warp-home {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      color: var(--neon-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-base);
+      z-index: 999;
+    }
+
+    .warp-home.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .warp-home:hover {
+      background: var(--neon-cyan);
+      color: var(--bg-deep);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    /* ==========================
+       RESPONSIVE
+       ========================== */
+    @media (max-width: 1024px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 768px) {
-      header {
+      .nav-links {
+        display: none;
+      }
+
+      .project-meta {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 1rem;
+        align-items: center;
       }
 
-      header nav {
+      .action-grid {
         flex-direction: column;
-        gap: 10px;
       }
 
-      .theme-toggle {
-        margin-top: 10px;
+      .btn-future {
+        width: 100%;
+        justify-content: center;
       }
 
-      .blog-title {
-        font-size: 1.5em;
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
 
-      main {
-        padding: 20px 10px;
+      .footer-grid {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      #particle-canvas,
+      .scanlines {
+        display: none;
       }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../index.html#projects">Projects</a>
-    </nav>
-    <button onclick="toggleTheme()" class="theme-toggle">🌓 Toggle Theme</button>
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-core"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-future" id="nav-future">
+    <div class="nav-hud">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-icon">◈</span>
+        <span class="brand-text">SUDIP</span>
+        <span class="brand-tag">.SYS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="../index.html" class="nav-link" data-index="01">HOME</a></li>
+        <li><a href="../index.html#about" class="nav-link" data-index="02">ABOUT</a></li>
+        <li><a href="../index.html#projects" class="nav-link active" data-index="03">WORKS</a></li>
+        <li><a href="../index.html#contact" class="nav-link" data-index="04">LINK</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Project Header -->
+  <header class="project-header">
+    <div class="project-badge">
+      <div class="badge-pulse"></div>
+      <span>PROJECT.ARCHIVE // PY_001</span>
+    </div>
+
+    <h1 class="project-title">TERMINAL_OPS</h1>
+    <p class="project-subtitle">CLI Tools Collection // Python Unit</p>
+
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-dot python"></span>
+        <span>PYTHON</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-dot cli"></span>
+        <span>CLI</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-dot"></span>
+        <span>SOLO_DEV</span>
+      </div>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Terminal-Based Python Projects</h1>
-    <p>A collection of interactive command-line applications built with Python to practice logic, input handling, and user experience.</p>
-  </section>
+  <!-- Main Content -->
+  <main class="section-container">
+    <!-- Visualizer / Slider -->
+    <div class="visualizer">
+      <div class="visualizer-glow"></div>
+      <div class="slide-scan"></div>
 
-  <main>
-    <article class="blog-post">
-      <h1 class="blog-title">Building CLI Tools with Python</h1>
-      <p class="meta">Published by Sudip Bhasima · September 11, 2025</p>
-
-      <div class="slider">
+      <div class="slide-stage">
         <figure class="slide active">
-          <img src="strong_password_generater.png" alt="Password Generator Screenshot" />
-          <figcaption>Password Generator</figcaption>
+          <img src="strong_password_generater.png" alt="Password Generator" loading="lazy" />
+          <figcaption class="slide-caption">PASSWORD_GENERATOR.EXE</figcaption>
         </figure>
         <figure class="slide">
-          <img src="todo_list.png" alt="Todo List Screenshot" />
-          <figcaption>Todo List CLI</figcaption>
+          <img src="todo_list.png" alt="Todo List" loading="lazy" />
+          <figcaption class="slide-caption">TODO_MANAGER.EXE</figcaption>
         </figure>
         <figure class="slide">
-          <img src="calculator.png" alt="Calculator Screenshot" />
-          <figcaption>CLI Calculator</figcaption>
+          <img src="calculator.png" alt="Calculator" loading="lazy" />
+          <figcaption class="slide-caption">CALCULATOR.EXE</figcaption>
         </figure>
         <figure class="slide">
-          <img src="number_guesing_game.png" alt="Number Guessing Game Screenshot" />
-          <figcaption>Number Guessing Game</figcaption>
+          <img src="number_guesing_game.png" alt="Number Guessing Game" loading="lazy" />
+          <figcaption class="slide-caption">GUESSING_GAME.EXE</figcaption>
         </figure>
-
-        <button class="prev" onclick="prevSlide()">❮</button>
-        <button class="next" onclick="nextSlide()">❯</button>
       </div>
 
-      <h2>Overview</h2>
-      <p>
+      <button class="slider-nav slider-prev" onclick="prevSlide()" aria-label="Previous">◀</button>
+      <button class="slider-nav slider-next" onclick="nextSlide()" aria-label="Next">▶</button>
+
+      <div class="slider-controls" id="slider-dots"></div>
+    </div>
+
+    <!-- Terminal Window -->
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="terminal-title">sudip@neptune:~/projects/python$</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="command">ls projects/</span>
+        </div>
+        <div class="terminal-output">
+          <span class="file-tag">password_gen.py</span>
+          <span class="file-tag">todo_cli.py</span>
+          <span class="file-tag">calculator.py</span>
+          <span class="file-tag">guess_game.py</span>
+        </div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="command">python3 --version</span>
+        </div>
+        <div class="terminal-output">Python 3.11.0</div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="command cursor-blink">_</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="info-grid">
+      <div class="info-panel">
+        <div class="panel-header">
+          <div class="panel-icon">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <span class="panel-title">TECH_STACK</span>
+        </div>
+        <ul class="tech-list">
+          <li><span class="tech-tag">CORE</span> Python 3.11</li>
+          <li><span class="tech-tag">ENV</span> VS Code</li>
+          <li><span class="tech-tag">SHELL</span> PowerShell / Bash</li>
+          <li><span class="tech-tag">VCS</span> Git</li>
+        </ul>
+      </div>
+
+      <div class="info-panel">
+        <div class="panel-header">
+          <div class="panel-icon">
+            <i class="fa-solid fa-list-check"></i>
+          </div>
+          <span class="panel-title">OBJECTIVES</span>
+        </div>
+        <ul class="feature-list">
+          <li>Strengthen Python fundamentals</li>
+          <li>Practice loops and conditionals</li>
+          <li>Handle user input gracefully</li>
+          <li>Build practical CLI utilities</li>
+          <li>Implement error handling</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Project Cards -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_01</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+          DEPLOYED_UNITS
+        <span class="title-bracket">]</span>
+      </h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <h3 class="card-title">PASSWORD_GENERATOR</h3>
+        <p class="card-desc">Enforces minimum length and generates cryptographically secure passwords with mixed character sets.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+        <h3 class="card-title">TODO_MANAGER</h3>
+        <p class="card-desc">Menu-driven task manager with status tracking, priority levels, and persistent storage.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <h3 class="card-title">CALCULATOR</h3>
+        <p class="card-desc">Interactive arithmetic processor with running total display and operation history.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-dice"></i>
+        </div>
+        <h3 class="card-title">GUESSING_GAME</h3>
+        <p class="card-desc">Feedback-based number guessing with attempt counter, hint system, and score tracking.</p>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_02</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+          SYSTEM_LOG
+        <span class="title-bracket">]</span>
+      </h2>
+    </div>
+
+    <div class="desc-block">
+      <p class="desc-text">
         These CLI projects were designed to strengthen my understanding of Python fundamentals, including loops, conditionals, and user input. Each tool solves a practical problem and runs entirely in the terminal.
       </p>
+      <p class="desc-text">
+        I designed and coded each project independently, focusing on clean logic, user-friendly prompts, and error handling. These projects were built iteratively, with attention to usability and terminal-based interaction. I ensured that each tool was intuitive, responsive, and capable of handling edge cases gracefully.
+      </p>
+    </div>
 
-      <h2>Technologies Used</h2>
-      <ul>
-        <li>Python 3</li>
-        <li>VS Code</li>
-        <li>Command Line / PowerShell</li>
-      </ul>
+    <!-- Actions -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_03</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+          DEPLOYMENT_LINKS
+        <span class="title-bracket">]</span>
+      </h2>
+    </div>
 
-      <h2>Featured Projects</h2>
-      <ul>
-        <li><strong>Password Generator:</strong> Enforces minimum length and generates secure passwords.</li>
-        <li><strong>Todo List CLI:</strong> Menu-driven task manager with status tracking.</li>
-        <li><strong>CLI Calculator:</strong> Adds numbers interactively and displays the running total.</li>
-        <li><strong>Number Guessing Game:</strong> Feedback-based guessing with attempt counter.</li>
-      </ul>
-
-      <h2>Role & Responsibilities</h2>
-      <p>
-        I designed and coded each project independently, focusing on clean logic, user-friendly prompts, 
-        and error handling. These projects were built iteratively, with attention to usability and terminal-based interaction. 
-        I ensured that each tool was intuitive, responsive, and capable of handling edge cases gracefully.
-    </p>
-
-      <h2>Team</h2>
-      <p>Solo project — all design, development, and testing were handled by me.</p>
-
-      <a rel="noopener" href="https://github.com/Sudip14" target="_blank" class="github-btn">View All Projects on GitHub</a>
-      <a href="#" class="demo-btn">Live Demo (Terminal Only)</a>
-
-      <br />
-      <a href="../index.html#projects" class="btn">← Back to Projects</a>
-    </article>
+    <div class="action-grid">
+      <a href="https://github.com/Sudip14" target="_blank" class="btn-future btn-primary-future">
+        <span class="btn-glow"></span>
+        <i class="fa-brands fa-github"></i>
+        <span>ACCESS_REPOSITORY</span>
+      </a>
+      <a href="#" class="btn-future btn-secondary-future" onclick="alert('CLI tools run in terminal environment only.')">
+        <i class="fa-solid fa-terminal"></i>
+        <span>TERMINAL_ONLY</span>
+      </a>
+      <a href="../index.html#projects" class="btn-future btn-secondary-future">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>RETURN_TO_BASE</span>
+      </a>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2025 Sudip Bhasima · <a rel="noopener" href="https://github.com/Sudip14" target="_blank">GitHub Profile</a></p>
+  <!-- Footer -->
+  <footer class="footer-future">
+    <div class="footer-scan"></div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span style="color: var(--neon-cyan); font-size: 1.2rem;">◈</span>
+        <span>SUDIP.SYS</span>
+      </div>
+      <div class="footer-coords">
+        <span>27.7172°N</span>
+        <span class="coord-divider">×</span>
+        <span>85.3240°E</span>
+      </div>
+      <div class="footer-copy">
+        <span>2024</span>
+        <span class="copy-divider">//</span>
+        <span>ALL_SYSTEMS_NOMINAL</span>
+      </div>
+    </div>
   </footer>
 
+  <!-- Warp Button -->
+  <button class="warp-home" id="warp-home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Return to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
   <script>
-    let darkMode = false;
-    function toggleTheme() {
-      darkMode = !darkMode;
-      document.documentElement.style.setProperty('--bg-color', darkMode ? '#1e1e1e' : '#ffffff');
-      document.documentElement.style.setProperty('--text-color', darkMode ? '#f0f0f0' : '#000000');
-      document.documentElement.style.setProperty('--accent-color', darkMode ? '#ff6f61' : '#d10000');
-      document.documentElement.style.setProperty('--hover-color', darkMode ? '#ffa07a' : '#ff6600');
-      document.documentElement.style.setProperty('--header-bg', darkMode ? '#333333' : '#0c0808');
-      document.documentElement.style.setProperty('--footer-bg', darkMode ? '#222' : '#f2f2f2');
-      document.documentElement.style.setProperty('--card-bg', darkMode ? '#2a2a2a' : '#ffffff');
+    // ==========================
+    // PARTICLE SYSTEM
+    // ==========================
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: 0, y: 0 };
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
 
+    function createParticles() {
+      const count = Math.min(window.innerWidth / 10, 80);
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 0.5,
+          opacity: Math.random() * 0.5 + 0.2,
+          color: Math.random() > 0.5 ? '#00f0ff' : '#ff004f'
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150 && dist > 0) {
+          const force = (150 - dist) / 150;
+          p.vx -= (dx / dist) * force * 0.02;
+          p.vy -= (dy / dist) * force * 0.02;
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.opacity;
+        ctx.fill();
+
+        particles.slice(i + 1).forEach(p2 => {
+          const dx2 = p.x - p2.x;
+          const dy2 = p.y - p2.y;
+          const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+          if (dist2 < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = (1 - dist2 / 100) * 0.15;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+      });
+
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => { resize(); createParticles(); });
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+    resize();
+    createParticles();
+    animateParticles();
+
+    // ==========================
+    // CUSTOM CURSOR
+    // ==========================
+    const cursorCore = document.querySelector('.cursor-core');
+    const cursorRing = document.querySelector('.cursor-ring');
+
+    if (cursorCore && !window.matchMedia('(hover: none)').matches) {
+      let ringX = 0, ringY = 0;
+      let mouseX = 0, mouseY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorCore.style.left = mouseX + 'px';
+        cursorCore.style.top = mouseY + 'px';
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document.querySelectorAll('a, button, .info-panel, .slider-nav, .project-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+      });
+    } else {
+      if (cursorCore) cursorCore.style.display = 'none';
+      if (cursorRing) cursorRing.style.display = 'none';
+    }
+
+    // ==========================
+    // NAVIGATION SCROLL
+    // ==========================
+    const nav = document.getElementById('nav-future');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ==========================
+    // SLIDER
+    // ==========================
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const dotsContainer = document.getElementById('slider-dots');
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+      dot.onclick = () => goToSlide(index);
+      dot.ariaLabel = `Slide ${index + 1}`;
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateDots() {
+      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
       });
     }
 
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      updateDots();
+    }
+
     function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
+      currentSlide = (currentSlide + 1) % totalSlides;
       showSlide(currentSlide);
     }
 
     function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       showSlide(currentSlide);
     }
 
-    setInterval(nextSlide, 6000);
+    function goToSlide(index) {
+      currentSlide = index;
+      showSlide(currentSlide);
+    }
+
+    let autoSlide = setInterval(nextSlide, 5000);
+    const visualizer = document.querySelector('.visualizer');
+    visualizer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    visualizer.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 5000));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // ==========================
+    // WARP BUTTON
+    // ==========================
+    const warpBtn = document.getElementById('warp-home');
+    window.addEventListener('scroll', () => {
+      warpBtn.classList.toggle('visible', window.scrollY > 500);
+    });
+
+    // ==========================
+    // SCROLL REVEAL
+    // ==========================
+    const revealElements = document.querySelectorAll('.info-panel, .desc-block, .section-header, .project-card, .terminal-window');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      revealObserver.observe(el);
+    });
   </script>
 </body>
 </html>
