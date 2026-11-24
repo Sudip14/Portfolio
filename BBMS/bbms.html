@@ -1,46 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Blood Bank Management System - Full-Stack PHP/MySQL Application" />
-  <meta name="theme-color" content="#050508" />
-  <title>BBMS // PROJECT_ARCHIVE | Sudip Bhasima</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blood Bank Management System — a PHP and MySQL full-stack project developed by Sudip Bhasima.">
+  <meta name="theme-color" content="#050508">
+
+  <title>Blood Bank Management System | Sudip Bhasima</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
   <style>
-    /* ==========================
-       FUTURISTIC THEME VARIABLES
-       ========================== */
     :root {
-      --bg-deep: #050508;
-      --bg-surface: #0a0a0f;
-      --bg-panel: #111118;
-      --bg-hover: #161620;
-
-      --neon-red: #ff004f;
-      --neon-pink: #ff3366;
-      --neon-orange: #ff6b35;
-      --neon-cyan: #00f0ff;
-      --neon-blue: #0066ff;
-      --neon-purple: #b829dd;
-      --neon-green: #00ff88;
-
-      --text-primary: #e8e8f0;
-      --text-secondary: #8b8b9e;
-      --text-dim: #4a4a5e;
-
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --border-glow: rgba(255, 0, 79, 0.3);
-
-      --font-mono: 'Orbitron', monospace;
-      --font-tech: 'Rajdhani', sans-serif;
-
-      --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      --bg: #050508;
+      --panel: #111118;
+      --panel-light: #161620;
+      --red: #ff004f;
+      --cyan: #00f0ff;
+      --purple: #b829dd;
+      --orange: #ff6b35;
+      --white: #e8e8f0;
+      --muted: #8b8b9e;
+      --border: rgba(255,255,255,.08);
+      --mono: 'Orbitron', monospace;
+      --tech: 'Rajdhani', sans-serif;
     }
 
     * {
@@ -51,373 +38,259 @@
 
     html {
       scroll-behavior: smooth;
-      font-size: 16px;
-      background: var(--bg-deep);
+      background: var(--bg);
     }
 
     body {
-      font-family: var(--font-tech);
-      background: var(--bg-deep);
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: var(--tech);
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.7;
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
-    /* ==========================
-       PARTICLE CANVAS
-       ========================== */
+    a {
+      color: inherit;
+    }
+
     #particle-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
       pointer-events: none;
+      z-index: 0;
     }
 
-    /* ==========================
-       SCANLINES & VIGNETTE
-       ========================== */
     .scanlines {
       position: fixed;
       inset: 0;
-      z-index: 9998;
+      z-index: 100;
       pointer-events: none;
       background: repeating-linear-gradient(
         0deg,
         transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.03) 2px,
-        rgba(0, 0, 0, 0.03) 4px
+        transparent 3px,
+        rgba(0,0,0,.025) 3px,
+        rgba(0,0,0,.025) 4px
       );
     }
 
-    .vignette {
-      position: fixed;
-      inset: 0;
-      z-index: 9997;
-      pointer-events: none;
-      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
-    }
+    /* Navigation */
 
-    /* ==========================
-       CUSTOM CURSOR
-       ========================== */
-    .cursor-core,
-    .cursor-ring {
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10000;
-      mix-blend-mode: screen;
-    }
-
-    .cursor-core {
-      width: 6px;
-      height: 6px;
-      background: var(--neon-cyan);
-      box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-    }
-
-    .cursor-ring {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      transition: width 0.2s, height 0.2s, border-color 0.2s;
-    }
-
-    .cursor-ring.hover {
-      width: 60px;
-      height: 60px;
-      border-color: var(--neon-red);
-      background: rgba(255, 0, 79, 0.05);
-    }
-
-    /* ==========================
-       NAVIGATION
-       ========================== */
     .nav-future {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1.2rem 0;
-      transition: all var(--transition-base);
+      width: 100%;
+      z-index: 50;
+      padding: 20px 0;
+      transition: .3s;
     }
 
     .nav-future.scrolled {
-      background: rgba(5, 5, 8, 0.9);
-      backdrop-filter: blur(30px) saturate(200%);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 0.8rem 0;
+      background: rgba(5,5,8,.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 0;
     }
 
     .nav-hud {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
+      max-width: 1250px;
+      padding: 0 25px;
+      margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .nav-brand {
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.3rem;
-      text-decoration: none;
-      font-family: var(--font-mono);
+      gap: 7px;
+      font-family: var(--mono);
     }
 
     .brand-icon {
-      color: var(--neon-red);
-      font-size: 1.5rem;
-      animation: iconPulse 3s infinite;
-    }
-
-    @keyframes iconPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      color: var(--red);
+      font-size: 25px;
     }
 
     .brand-text {
-      font-size: 1.2rem;
+      font-size: 18px;
       font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.1em;
+      letter-spacing: 2px;
     }
 
     .brand-tag {
-      font-size: 0.7rem;
-      color: var(--neon-red);
-      font-weight: 500;
+      color: var(--red);
+      font-size: 11px;
     }
 
     .nav-links {
-      display: flex;
       list-style: none;
-      gap: 2rem;
+      display: flex;
+      gap: 30px;
     }
 
     .nav-link {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-secondary);
       text-decoration: none;
-      letter-spacing: 0.15em;
-      position: relative;
-      padding: 0.3rem 0;
-      transition: color var(--transition-fast);
-    }
-
-    .nav-link::before {
-      content: attr(data-index);
-      position: absolute;
-      top: -0.8rem;
-      left: 0;
-      font-size: 0.6rem;
-      color: var(--neon-red);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--neon-red);
-      box-shadow: 0 0 8px var(--neon-red);
-      transition: width var(--transition-base);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      transition: .3s;
     }
 
     .nav-link:hover,
     .nav-link.active {
-      color: var(--text-primary);
+      color: var(--cyan);
     }
 
-    .nav-link:hover::before,
-    .nav-link.active::before {
-      opacity: 1;
-    }
+    /* Hero */
 
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
-
-    /* ==========================
-       PROJECT HEADER
-       ========================== */
     .project-header {
-      min-height: 60vh;
+      min-height: 570px;
+      padding: 150px 20px 90px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
-      padding: 8rem 2rem 4rem;
-      overflow: hidden;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .project-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.5rem 1.2rem;
-      background: rgba(255, 0, 79, 0.08);
-      border: 1px solid rgba(255, 0, 79, 0.2);
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--neon-red);
-      letter-spacing: 0.15em;
-      margin-bottom: 2rem;
+      gap: 10px;
+      padding: 9px 17px;
+      border: 1px solid rgba(255,0,79,.3);
+      background: rgba(255,0,79,.08);
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
     }
 
     .badge-pulse {
-      width: 6px;
-      height: 6px;
-      background: var(--neon-red);
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      box-shadow: 0 0 10px var(--neon-red);
-      animation: badgePulse 2s infinite;
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red);
+      animation: pulse 1.5s infinite;
     }
 
-    @keyframes badgePulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.5; }
+    @keyframes pulse {
+      50% { opacity: .4; transform: scale(1.4); }
     }
 
     .project-title {
-      font-family: var(--font-mono);
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-family: var(--mono);
+      font-size: clamp(30px, 6vw, 62px);
+      line-height: 1.3;
       font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
     }
 
     .project-subtitle {
-      font-family: var(--font-mono);
-      font-size: clamp(0.8rem, 2vw, 1rem);
-      color: var(--neon-cyan);
-      letter-spacing: 0.3em;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: clamp(10px, 2vw, 14px);
+      letter-spacing: 4px;
       text-transform: uppercase;
     }
 
     .project-meta {
       display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.15em;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 35px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
     }
 
     .meta-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 9px;
     }
 
     .meta-dot {
-      width: 6px;
-      height: 6px;
+      height: 7px;
+      width: 7px;
       border-radius: 50%;
-      background: var(--neon-cyan);
-      box-shadow: 0 0 8px var(--neon-cyan);
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
     }
 
-    .meta-dot.php { background: var(--neon-purple); box-shadow: 0 0 8px var(--neon-purple); }
-    .meta-dot.mysql { background: var(--neon-orange); box-shadow: 0 0 8px var(--neon-orange); }
+    .meta-dot.php {
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+    }
 
-    /* ==========================
-       CONTENT SECTIONS
-       ========================== */
+    .meta-dot.mysql {
+      background: var(--orange);
+      box-shadow: 0 0 10px var(--orange);
+    }
+
+    /* Main layout */
+
     .section-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
+      max-width: 1150px;
+      margin: auto;
+      padding: 40px 25px 90px;
       position: relative;
       z-index: 1;
     }
 
     .section-header {
-      margin-bottom: 3rem;
-      position: relative;
+      margin: 55px 0 28px;
     }
 
     .header-line {
-      width: 60px;
+      width: 55px;
       height: 2px;
-      background: linear-gradient(90deg, var(--neon-red), transparent);
-      margin-bottom: 1rem;
-      box-shadow: 0 0 10px var(--neon-red);
+      background: var(--red);
+      box-shadow: 0 0 12px var(--red);
+      margin-bottom: 15px;
     }
 
     .section-tag {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--neon-red);
-      letter-spacing: 0.3em;
-      margin-bottom: 0.5rem;
       display: block;
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
     }
 
     .section-title {
-      font-family: var(--font-mono);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-size: clamp(20px, 3vw, 29px);
+      letter-spacing: 1px;
     }
 
     .title-bracket {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+      color: var(--cyan);
     }
 
-    /* ==========================
-       SLIDER / VISUALIZER
-       ========================== */
+    /* Screenshot slider */
+
     .visualizer {
-      position: relative;
-      background: var(--bg-panel);
-      border: 1px solid var(--border-subtle);
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 4rem;
-    }
-
-    .visualizer-glow {
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), transparent, rgba(255, 0, 79, 0.1));
-      opacity: 0;
-      transition: opacity var(--transition-base);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .visualizer:hover .visualizer-glow {
-      opacity: 1;
-    }
-
-    .slide-stage {
       position: relative;
-      z-index: 1;
+      margin-bottom: 70px;
     }
 
     .slide {
@@ -427,404 +300,301 @@
 
     .slide.active {
       display: block;
-      animation: slideIn 0.5s ease;
+      animation: slideIn .4s ease;
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .slide img {
       width: 100%;
-      height: auto;
-      max-height: 500px;
+      height: 480px;
       object-fit: contain;
       display: block;
+      background: #08080d;
     }
 
     .slide-caption {
-      padding: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.1em;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .slide-scan {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-      animation: scanLine 3s ease-in-out infinite;
-      box-shadow: 0 0 10px var(--neon-cyan);
-    }
-
-    @keyframes scanLine {
-      0%, 100% { top: 0; opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { top: 100%; opacity: 0; }
-    }
-
-    .slider-controls {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .slider-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--text-dim);
-      border: none;
-      cursor: pointer;
-      transition: all var(--transition-base);
-    }
-
-    .slider-dot.active {
-      background: var(--neon-cyan);
-      box-shadow: 0 0 10px var(--neon-cyan);
-      width: 24px;
-      border-radius: 4px;
+      padding: 15px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      border-top: 1px solid var(--border);
     }
 
     .slider-nav {
       position: absolute;
-      top: 50%;
+      top: 43%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid var(--border-subtle);
-      color: var(--neon-cyan);
+      width: 45px;
+      height: 45px;
+      border: 1px solid var(--border);
       border-radius: 50%;
+      background: rgba(0,0,0,.75);
+      color: var(--cyan);
       cursor: pointer;
-      z-index: 10;
-      transition: all var(--transition-base);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
+      z-index: 5;
+      transition: .3s;
     }
 
     .slider-nav:hover {
-      background: var(--neon-red);
-      color: #fff;
-      border-color: var(--neon-red);
+      background: var(--red);
+      color: white;
     }
 
     .slider-prev { left: 15px; }
     .slider-next { right: 15px; }
 
-    /* ==========================
-       INFO GRID
-       ========================== */
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      padding: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .slider-dot {
+      width: 9px;
+      height: 9px;
+      border: 0;
+      border-radius: 10px;
+      background: #555;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .slider-dot.active {
+      width: 25px;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    /* Information panels */
+
     .info-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 4rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
     }
 
     .info-panel {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-subtle);
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      transition: all var(--transition-base);
+      padding: 28px;
+      transition: .3s;
     }
 
     .info-panel:hover {
-      border-color: var(--neon-cyan);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1);
+      transform: translateY(-5px);
+      border-color: rgba(0,240,255,.4);
+      box-shadow: 0 10px 35px rgba(0,240,255,.06);
     }
 
     .panel-header {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--border);
     }
 
     .panel-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: rgba(0,240,255,.08);
+      border: 1px solid rgba(0,240,255,.2);
       border-radius: 8px;
-      color: var(--neon-cyan);
-      font-size: 1rem;
+      color: var(--cyan);
     }
 
     .panel-title {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: 0.1em;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 2px;
     }
 
-    .tech-list {
+    .tech-list,
+    .feature-list {
       list-style: none;
     }
 
     .tech-list li {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.6rem 0;
-      font-family: var(--font-tech);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 16px;
     }
 
     .tech-list li:last-child {
-      border-bottom: none;
+      border: none;
     }
 
     .tech-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      padding: 0.2rem 0.5rem;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 3px;
-      color: var(--neon-cyan);
-      letter-spacing: 0.1em;
-    }
-
-    .feature-list {
-      list-style: none;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--cyan);
+      border: 1px solid rgba(0,240,255,.25);
+      background: rgba(0,240,255,.07);
+      padding: 4px 7px;
+      min-width: 75px;
+      text-align: center;
     }
 
     .feature-list li {
-      padding: 0.6rem 0;
-      padding-left: 1.5rem;
+      padding: 8px 0 8px 22px;
       position: relative;
-      font-family: var(--font-tech);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
+      color: var(--muted);
+      font-size: 16px;
     }
 
     .feature-list li::before {
-      content: '▸';
+      content: "▸";
       position: absolute;
       left: 0;
-      color: var(--neon-red);
-      font-weight: bold;
+      color: var(--red);
     }
 
-    /* ==========================
-       DESCRIPTION BLOCK
-       ========================== */
+    /* Description */
+
     .desc-block {
-      background: var(--bg-panel);
-      border: 1px solid var(--border-subtle);
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 3rem;
+      padding: 30px;
       position: relative;
-      overflow: hidden;
     }
 
     .desc-block::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
+      left: 10%;
+      width: 80%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
     }
 
     .desc-text {
-      font-family: var(--font-tech);
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+      margin-bottom: 16px;
     }
 
     .desc-text:last-child {
       margin-bottom: 0;
     }
 
-    /* ==========================
-       ACTION BUTTONS
-       ========================== */
+    /* Actions */
+
     .action-grid {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 3rem;
+      gap: 15px;
+      margin-top: 30px;
     }
 
     .btn-future {
-      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 2rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 23px;
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 1.5px;
       text-decoration: none;
-      border: none;
-      border-radius: 4px;
-      overflow: hidden;
-      transition: all var(--transition-base);
-      cursor: pointer;
+      transition: .3s;
     }
 
-    .btn-primary-future {
-      background: var(--neon-red);
+    .btn-primary {
+      background: var(--red);
       color: white;
+      border: 1px solid var(--red);
     }
 
-    .btn-glow {
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(45deg, var(--neon-red), var(--neon-orange), var(--neon-red));
-      border-radius: 4px;
-      z-index: -1;
-      opacity: 0;
-      filter: blur(15px);
-      transition: opacity var(--transition-base);
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255,0,79,.3);
     }
 
-    .btn-primary-future:hover .btn-glow {
-      opacity: 0.6;
-    }
-
-    .btn-primary-future:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(255, 0, 79, 0.3);
-    }
-
-    .btn-secondary-future {
+    .btn-secondary {
       background: transparent;
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
+      color: var(--white);
+      border: 1px solid var(--border);
     }
 
-    .btn-secondary-future:hover {
-      border-color: var(--neon-cyan);
-      background: rgba(0, 240, 255, 0.05);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-      transform: translateY(-2px);
+    .btn-secondary:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+      transform: translateY(-3px);
     }
 
-    /* ==========================
-       FOOTER
-       ========================== */
+    /* Footer */
+
     .footer-future {
-      background: var(--bg-deep);
-      border-top: 1px solid var(--border-subtle);
-      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      padding: 35px 25px;
       position: relative;
-      overflow: hidden;
+      z-index: 1;
     }
 
     .footer-grid {
-      max-width: 1400px;
-      margin: 0 auto;
+      max-width: 1150px;
+      margin: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 15px;
     }
 
     .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      color: var(--text-primary);
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 2px;
     }
 
-    .footer-coords {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-    }
-
-    .coord-divider {
-      color: var(--neon-cyan);
+    .footer-brand span {
+      color: var(--cyan);
     }
 
     .footer-copy {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
     }
 
-    .copy-divider {
-      color: var(--neon-red);
-    }
+    /* Back to top */
 
-    .footer-scan {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-red), transparent);
-      animation: footerScan 4s linear infinite;
-    }
-
-    @keyframes footerScan {
-      0% { transform: translateX(-100%); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateX(100%); opacity: 0; }
-    }
-
-    /* ==========================
-       WARP BUTTON
-       ========================== */
     .warp-home {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 50px;
-      height: 50px;
-      background: var(--bg-panel);
-      border: 1px solid var(--border-subtle);
+      bottom: 25px;
+      right: 25px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      color: var(--neon-cyan);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 1px solid var(--cyan);
+      background: var(--panel);
+      color: var(--cyan);
       cursor: pointer;
+      z-index: 20;
       opacity: 0;
       visibility: hidden;
-      transition: all var(--transition-base);
-      z-index: 999;
+      transition: .3s;
     }
 
     .warp-home.visible {
@@ -833,40 +603,45 @@
     }
 
     .warp-home:hover {
-      background: var(--neon-cyan);
-      color: var(--bg-deep);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-      transform: translateY(-4px);
+      background: var(--cyan);
+      color: var(--bg);
     }
 
-    /* ==========================
-       RESPONSIVE
-       ========================== */
-    @media (max-width: 1024px) {
-      .info-grid {
-        grid-template-columns: 1fr;
+    /* Responsive */
+
+    @media(max-width: 768px) {
+      .nav-hud {
+        padding: 0 18px;
       }
-    }
 
-    @media (max-width: 768px) {
       .nav-links {
-        display: none;
+        gap: 12px;
+      }
+
+      .nav-link {
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+
+      .project-header {
+        min-height: 490px;
       }
 
       .project-meta {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
+        gap: 15px;
       }
 
-      .action-grid {
-        flex-direction: column;
+      .slide img {
+        height: 300px;
       }
 
-      .btn-future {
-        width: 100%;
-        justify-content: center;
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-container {
+        padding-left: 18px;
+        padding-right: 18px;
       }
 
       .footer-grid {
@@ -875,12 +650,55 @@
       }
     }
 
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
+    @media(max-width: 480px) {
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-link {
+        font-size: 8px;
+      }
+
+      .brand-text {
+        font-size: 14px;
+      }
+
+      .brand-tag {
+        display: none;
+      }
+
+      .project-header {
+        padding-top: 130px;
+      }
+
+      .slide img {
+        height: 230px;
+      }
+
+      .info-panel,
+      .desc-block {
+        padding: 20px;
+      }
+
+      .slider-nav {
+        width: 35px;
+        height: 35px;
+      }
+
+      .action-grid {
+        flex-direction: column;
+      }
+
+      .btn-future {
+        width: 100%;
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
 
       #particle-canvas,
@@ -892,20 +710,14 @@
 </head>
 
 <body>
-  <!-- Particle Canvas -->
+
   <canvas id="particle-canvas"></canvas>
-
-  <!-- Scanlines -->
   <div class="scanlines"></div>
-  <div class="vignette"></div>
-
-  <!-- Custom Cursor -->
-  <div class="cursor-core"></div>
-  <div class="cursor-ring"></div>
 
   <!-- Navigation -->
   <nav class="nav-future" id="nav-future">
     <div class="nav-hud">
+
       <a href="../index.html" class="nav-brand">
         <span class="brand-icon">◈</span>
         <span class="brand-text">SUDIP</span>
@@ -913,238 +725,398 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="../index.html" class="nav-link" data-index="01">HOME</a></li>
-        <li><a href="../index.html#about" class="nav-link" data-index="02">ABOUT</a></li>
-        <li><a href="../index.html#projects" class="nav-link active" data-index="03">WORKS</a></li>
-        <li><a href="../index.html#contact" class="nav-link" data-index="04">LINK</a></li>
+        <li><a href="../index.html" class="nav-link">HOME</a></li>
+        <li><a href="../index.html#about" class="nav-link">ABOUT</a></li>
+        <li><a href="../index.html#projects" class="nav-link active">PROJECTS</a></li>
+        <li><a href="../index.html#contact" class="nav-link">CONTACT</a></li>
       </ul>
+
     </div>
   </nav>
 
-  <!-- Project Header -->
+  <!-- Project Hero -->
   <header class="project-header">
+
     <div class="project-badge">
-      <div class="badge-pulse"></div>
-      <span>PROJECT.ARCHIVE // BBMS_001</span>
+      <span class="badge-pulse"></span>
+      <span>PROJECT ARCHIVE // BBMS_001</span>
     </div>
 
-    <h1 class="project-title">BLOOD_BANK_MGMT</h1>
-    <p class="project-subtitle">Full-Stack Application // PHP Core</p>
+    <h1 class="project-title">BLOOD BANK<br>MANAGEMENT SYSTEM</h1>
+
+    <p class="project-subtitle">
+      Full-Stack Web Application
+    </p>
 
     <div class="project-meta">
       <div class="meta-item">
         <span class="meta-dot php"></span>
-        <span>PHP</span>
+        PHP
       </div>
+
       <div class="meta-item">
         <span class="meta-dot mysql"></span>
-        <span>MYSQL</span>
+        MySQL
       </div>
+
       <div class="meta-item">
         <span class="meta-dot"></span>
-        <span>2025</span>
+        Completed Project
       </div>
     </div>
+
   </header>
 
-  <!-- Main Content -->
   <main class="section-container">
-    <!-- Visualizer / Slider -->
-    <div class="visualizer">
-      <div class="visualizer-glow"></div>
-      <div class="slide-scan"></div>
 
-      <div class="slide-stage">
-        <figure class="slide active">
-          <img src="Landing_page.png" alt="Landing Page" loading="lazy" />
-          <figcaption class="slide-caption">LANDING_PAGE.SCREEN</figcaption>
-        </figure>
-        <figure class="slide">
-          <img src="about_us.png" alt="About Us" loading="lazy" />
-          <figcaption class="slide-caption">ABOUT_US.MODULE</figcaption>
-        </figure>
-        <figure class="slide">
-          <img src="dashboard.png" alt="Dashboard" loading="lazy" />
-          <figcaption class="slide-caption">ADMIN_DASHBOARD</figcaption>
-        </figure>
-        <figure class="slide">
-          <img src="donor_list.png" alt="Donor List" loading="lazy" />
-          <figcaption class="slide-caption">DONOR_REGISTRY</figcaption>
-        </figure>
-      </div>
-
-      <button class="slider-nav slider-prev" onclick="prevSlide()" aria-label="Previous">◀</button>
-      <button class="slider-nav slider-next" onclick="nextSlide()" aria-label="Next">▶</button>
-
-      <div class="slider-controls" id="slider-dots"></div>
+    <!-- Screenshots -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_01</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+        PROJECT_SCREENSHOTS
+        <span class="title-bracket">]</span>
+      </h2>
     </div>
 
-    <!-- Info Grid -->
+    <div class="visualizer">
+
+      <div class="slide-stage">
+
+        <figure class="slide active">
+          <img src="Landing_page.png" alt="Blood Bank Management System landing page">
+          <figcaption class="slide-caption">01 // LANDING PAGE</figcaption>
+        </figure>
+
+        <figure class="slide">
+          <img src="about_us.png" alt="Blood Bank Management System about page">
+          <figcaption class="slide-caption">02 // ABOUT MODULE</figcaption>
+        </figure>
+
+        <figure class="slide">
+          <img src="dashboard.png" alt="Blood Bank Management System admin dashboard">
+          <figcaption class="slide-caption">03 // ADMIN DASHBOARD</figcaption>
+        </figure>
+
+        <figure class="slide">
+          <img src="donor_list.png" alt="Blood Bank Management System donor list">
+          <figcaption class="slide-caption">04 // DONOR MANAGEMENT</figcaption>
+        </figure>
+
+      </div>
+
+      <button class="slider-nav slider-prev" id="prevSlide" aria-label="Previous screenshot">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button class="slider-nav slider-next" id="nextSlide" aria-label="Next screenshot">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="slider-controls" id="slider-dots"></div>
+
+    </div>
+
+    <!-- Technology and Features -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_02</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+        TECHNOLOGY_AND_FEATURES
+        <span class="title-bracket">]</span>
+      </h2>
+    </div>
+
     <div class="info-grid">
+
       <div class="info-panel">
+
         <div class="panel-header">
           <div class="panel-icon">
             <i class="fa-solid fa-microchip"></i>
           </div>
           <span class="panel-title">TECH_STACK</span>
         </div>
+
         <ul class="tech-list">
-          <li><span class="tech-tag">CORE</span> HTML5 & CSS3</li>
-          <li><span class="tech-tag">LOGIC</span> JavaScript (ES6+)</li>
-          <li><span class="tech-tag">BACKEND</span> PHP</li>
-          <li><span class="tech-tag">DATA</span> MySQL Database</li>
-          <li><span class="tech-tag">ENV</span> VS Code</li>
+          <li><span class="tech-tag">FRONTEND</span> HTML5 & CSS3</li>
+          <li><span class="tech-tag">SCRIPT</span> JavaScript</li>
+          <li><span class="tech-tag">BACKEND</span> Core PHP</li>
+          <li><span class="tech-tag">DATABASE</span> MySQL</li>
+          <li><span class="tech-tag">TOOLS</span> VS Code</li>
+          <li><span class="tech-tag">ENV</span> XAMPP</li>
+          <li><span class="tech-tag">VERSION</span> Git & GitHub</li>
         </ul>
+
       </div>
 
       <div class="info-panel">
+
         <div class="panel-header">
           <div class="panel-icon">
             <i class="fa-solid fa-list-check"></i>
           </div>
-          <span class="panel-title">FEATURES</span>
+          <span class="panel-title">CORE_FEATURES</span>
         </div>
+
         <ul class="feature-list">
           <li>Donor registration and profile management</li>
-          <li>Real-time blood stock tracking</li>
-          <li>Request and approval workflow</li>
-          <li>Admin dashboard with analytics</li>
-          <li>Responsive UI for desktop and mobile</li>
-          <li>Secure authentication system</li>
+          <li>Blood group and inventory management</li>
+          <li>Blood request submission and handling</li>
+          <li>Request approval workflow</li>
+          <li>Admin dashboard and management</li>
+          <li>Database integration and data management</li>
+          <li>Responsive user interface</li>
         </ul>
+
       </div>
+
     </div>
 
-    <!-- Description -->
+    <!-- Overview -->
     <div class="section-header">
       <div class="header-line"></div>
-      <span class="section-tag">MODULE_01</span>
+      <span class="section-tag">MODULE_03</span>
       <h2 class="section-title">
         <span class="title-bracket">[</span>
-        SYSTEM_OVERVIEW
+        PROJECT_OVERVIEW
         <span class="title-bracket">]</span>
       </h2>
     </div>
 
     <div class="desc-block">
+
       <p class="desc-text">
-        The Blood Bank Management System (BBMS) is a full-stack project that simplifies
-        the process of managing blood donors, requests, and stock availability.
-        It ensures transparency, quick access to donor data, and efficient blood request handling.
+        The Blood Bank Management System (BBMS) is a full-stack web application
+        designed to simplify blood donor management, blood inventory tracking,
+        and blood request handling. The system provides a centralized platform
+        for managing donor information and blood availability.
       </p>
+
       <p class="desc-text">
-        I designed and implemented the backend logic for donor registration, request handling,
-        and stock updates. Additionally, I built the frontend UI and integrated it with
-        the database for real-time updates.
+        I developed the application using HTML, CSS, JavaScript, Core PHP,
+        and MySQL. The system connects the user interface with backend
+        functionality and database operations to manage donor records,
+        blood stock, and requests.
       </p>
+
       <p class="desc-text">
-        The main challenge was maintaining consistency between stock levels and requests.
-        Handling concurrent requests required transaction management in MySQL.
-        This project strengthened my knowledge in database design, secure PHP coding,
-        and responsive UI practices.
+        One of the important aspects of this project was maintaining
+        consistency between blood inventory and request processing.
+        Working on this system helped me improve my understanding of
+        backend development, database design, CRUD operations,
+        and full-stack application development.
       </p>
+
     </div>
 
-    <!-- Team & Actions -->
+    <!-- My Contribution -->
     <div class="section-header">
       <div class="header-line"></div>
-      <span class="section-tag">MODULE_02</span>
+      <span class="section-tag">MODULE_04</span>
       <h2 class="section-title">
         <span class="title-bracket">[</span>
-        DEPLOYMENT_LINKS
+        MY_CONTRIBUTION
+        <span class="title-bracket">]</span>
+      </h2>
+    </div>
+
+    <div class="desc-block">
+
+      <p class="desc-text">
+        I worked on the development of the system, including frontend
+        interface implementation, PHP backend functionality, and
+        MySQL database integration.
+      </p>
+
+      <ul class="feature-list">
+        <li>Designed and implemented application pages and user interfaces.</li>
+        <li>Developed PHP backend functionality.</li>
+        <li>Connected application modules with the MySQL database.</li>
+        <li>Implemented donor and blood request management operations.</li>
+        <li>Worked on blood inventory updates and administrative features.</li>
+      </ul>
+
+    </div>
+
+    <!-- Links -->
+    <div class="section-header">
+      <div class="header-line"></div>
+      <span class="section-tag">MODULE_05</span>
+      <h2 class="section-title">
+        <span class="title-bracket">[</span>
+        PROJECT_LINKS
         <span class="title-bracket">]</span>
       </h2>
     </div>
 
     <div class="action-grid">
-      <a href="https://github.com/Sudip14/blood-bank-management-system" target="_blank" class="btn-future btn-primary-future">
-        <span class="btn-glow"></span>
+
+      <a
+        href="https://github.com/Sudip14/blood-bank-management-system"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-future btn-primary">
         <i class="fa-brands fa-github"></i>
-        <span>ACCESS_REPOSITORY</span>
+        VIEW_SOURCE_CODE
       </a>
-      <a href="#" class="btn-future btn-secondary-future" onclick="alert('Live demo deployment pending.')">
-        <i class="fa-solid fa-satellite-dish"></i>
-        <span>INITIATE_DEMO</span>
-      </a>
-      <a href="../index.html#projects" class="btn-future btn-secondary-future">
+
+      <a
+        href="../index.html#projects"
+        class="btn-future btn-secondary">
         <i class="fa-solid fa-arrow-left"></i>
-        <span>RETURN_TO_BASE</span>
+        BACK_TO_PROJECTS
       </a>
+
+      <a
+        href="../index.html#contact"
+        class="btn-future btn-secondary">
+        <i class="fa-solid fa-envelope"></i>
+        CONTACT_ME
+      </a>
+
     </div>
+
   </main>
 
   <!-- Footer -->
   <footer class="footer-future">
-    <div class="footer-scan"></div>
     <div class="footer-grid">
+
       <div class="footer-brand">
-        <span style="color: var(--neon-cyan); font-size: 1.2rem;">◈</span>
-        <span>SUDIP.SYS</span>
+        <span>◈</span> SUDIP.SYS
       </div>
-      <div class="footer-coords">
-        <span>27.7172°N</span>
-        <span class="coord-divider">×</span>
-        <span>85.3240°E</span>
-      </div>
+
       <div class="footer-copy">
-        <span>2024</span>
-        <span class="copy-divider">//</span>
-        <span>ALL_SYSTEMS_NOMINAL</span>
+        © <span id="currentYear"></span> SUDIP BHASIMA. ALL RIGHTS RESERVED.
       </div>
+
     </div>
   </footer>
 
-  <!-- Warp Button -->
-  <button class="warp-home" id="warp-home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Return to top">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M12 19V5M5 12l7-7 7 7"/>
-    </svg>
+  <!-- Back to top -->
+  <button class="warp-home" id="warp-home" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
   </button>
 
   <script>
-    // ==========================
-    // PARTICLE SYSTEM
-    // ==========================
+    // Navigation background
+    const nav = document.getElementById('nav-future');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+
+      document.getElementById('warp-home')
+        .classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Back to top
+    document.getElementById('warp-home').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Footer year
+    document.getElementById('currentYear').textContent =
+      new Date().getFullYear();
+
+    // Screenshot slider
+    let currentSlide = 0;
+
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('slider-dots');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      if (!totalSlides) return;
+
+      currentSlide = (index + totalSlides) % totalSlides;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    slides.forEach((slide, index) => {
+      const dot = document.createElement('button');
+
+      dot.type = 'button';
+      dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Show screenshot ${index + 1}`);
+
+      dot.addEventListener('click', () => showSlide(index));
+
+      dotsContainer.appendChild(dot);
+    });
+
+    document.getElementById('nextSlide')
+      .addEventListener('click', nextSlide);
+
+    document.getElementById('prevSlide')
+      .addEventListener('click', prevSlide);
+
+    // Automatic slider
+    let autoSlide = setInterval(nextSlide, 5000);
+
+    const visualizer = document.querySelector('.visualizer');
+
+    visualizer.addEventListener('mouseenter', () => {
+      clearInterval(autoSlide);
+    });
+
+    visualizer.addEventListener('mouseleave', () => {
+      clearInterval(autoSlide);
+      autoSlide = setInterval(nextSlide, 5000);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') nextSlide();
+      if (event.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Particle background
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouse = { x: 0, y: 0 };
 
-    function resize() {
+    let particles = [];
+    let mouse = { x: -1000, y: -1000 };
+
+    function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
 
     function createParticles() {
-      const count = Math.min(window.innerWidth / 10, 80);
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 2 + 0.5,
-          opacity: Math.random() * 0.5 + 0.2,
-          color: Math.random() > 0.5 ? '#00f0ff' : '#ff004f'
-        });
-      }
+      const count = Math.min(Math.floor(window.innerWidth / 16), 65);
+
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - .5) * .35,
+        vy: (Math.random() - .5) * .35,
+        size: Math.random() * 1.5 + .5,
+        color: Math.random() > .5 ? '#00f0ff' : '#ff004f'
+      }));
     }
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, i) => {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 150 && dist > 0) {
-          const force = (150 - dist) / 150;
-          p.vx -= (dx / dist) * force * 0.02;
-          p.vy -= (dy / dist) * force * 0.02;
-        }
-
         p.x += p.vx;
         p.y += p.vy;
 
@@ -1154,160 +1126,49 @@
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.opacity;
+        ctx.globalAlpha = .45;
         ctx.fill();
 
-        particles.slice(i + 1).forEach(p2 => {
-          const dx2 = p.x - p2.x;
-          const dy2 = p.y - p2.y;
-          const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-          if (dist2 < 100) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = p.color;
-            ctx.globalAlpha = (1 - dist2 / 100) * 0.15;
-            ctx.lineWidth = 0.5;
+            ctx.globalAlpha = (1 - distance / 100) * .12;
+            ctx.lineWidth = .5;
             ctx.stroke();
           }
-        });
+        }
       });
 
       ctx.globalAlpha = 1;
       requestAnimationFrame(animateParticles);
     }
 
-    window.addEventListener('resize', () => { resize(); createParticles(); });
-    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      resizeCanvas();
+      createParticles();
+      animateParticles();
 
-    resize();
-    createParticles();
-    animateParticles();
-
-    // ==========================
-    // CUSTOM CURSOR
-    // ==========================
-    const cursorCore = document.querySelector('.cursor-core');
-    const cursorRing = document.querySelector('.cursor-ring');
-
-    if (cursorCore && !window.matchMedia('(hover: none)').matches) {
-      let ringX = 0, ringY = 0;
-      let mouseX = 0, mouseY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorCore.style.left = mouseX + 'px';
-        cursorCore.style.top = mouseY + 'px';
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        createParticles();
       });
 
-      function animateRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        cursorRing.style.left = ringX + 'px';
-        cursorRing.style.top = ringY + 'px';
-        requestAnimationFrame(animateRing);
-      }
-      animateRing();
-
-      document.querySelectorAll('a, button, .info-panel, .slider-nav').forEach(el => {
-        el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+      window.addEventListener('mousemove', (event) => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
       });
     } else {
-      if (cursorCore) cursorCore.style.display = 'none';
-      if (cursorRing) cursorRing.style.display = 'none';
+      canvas.style.display = 'none';
     }
-
-    // ==========================
-    // NAVIGATION SCROLL
-    // ==========================
-    const nav = document.getElementById('nav-future');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // ==========================
-    // SLIDER
-    // ==========================
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    const dotsContainer = document.getElementById('slider-dots');
-
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
-      dot.onclick = () => goToSlide(index);
-      dot.ariaLabel = `Slide ${index + 1}`;
-      dotsContainer.appendChild(dot);
-    });
-
-    function updateDots() {
-      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-      updateDots();
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      showSlide(currentSlide);
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      showSlide(currentSlide);
-    }
-
-    function goToSlide(index) {
-      currentSlide = index;
-      showSlide(currentSlide);
-    }
-
-    let autoSlide = setInterval(nextSlide, 5000);
-    const visualizer = document.querySelector('.visualizer');
-    visualizer.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    visualizer.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 5000));
-
-    // Keyboard nav
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    });
-
-    // ==========================
-    // WARP BUTTON
-    // ==========================
-    const warpBtn = document.getElementById('warp-home');
-    window.addEventListener('scroll', () => {
-      warpBtn.classList.toggle('visible', window.scrollY > 500);
-    });
-
-    // ==========================
-    // SCROLL REVEAL
-    // ==========================
-    const revealElements = document.querySelectorAll('.info-panel, .desc-block, .section-header, .action-grid');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      revealObserver.observe(el);
-    });
   </script>
+
 </body>
 </html>

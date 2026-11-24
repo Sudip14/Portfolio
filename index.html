@@ -1,567 +1,992 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sudip Bhasima — Full-Stack Developer from Nepal. Building the future of web." />
-  <meta name="theme-color" content="#050508" />
-  <title>Sudip Bhasima | Future Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/1445dfc964.js" crossorigin="anonymous" defer></script>
-  <base target="_blank">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Sudip Bhasima - Full Stack Developer from Kathmandu, Nepal. Explore my skills, experience, and software development projects.">
+    <meta name="author" content="Sudip Bhasima">
+    <meta name="theme-color" content="#0c0808">
+
+    <title>Sudip Bhasima | Full Stack Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Particle Canvas Background -->
-  <canvas id="particle-canvas" class="particle-canvas"></canvas>
 
-  <!-- Scanline Overlay -->
-  <div class="scanlines"></div>
-  <div class="vignette"></div>
+<!-- ================= NAVIGATION ================= -->
 
-  <!-- Glitch Overlay -->
-  <div class="glitch-overlay" id="glitch-overlay"></div>
+<header class="header">
 
-  <!-- Custom Cursor -->
-  <div class="cursor-core"></div>
-  <div class="cursor-ring"></div>
-  <div class="cursor-trail" id="cursor-trail"></div>
+    <nav class="navbar">
 
-  <!-- Navigation -->
-  <nav class="nav-future" id="nav-future">
-    <div class="nav-hud">
-      <a href="#" class="nav-brand">
-        <span class="brand-icon">◈</span>
-        <span class="brand-text" data-text="SUDIP">SUDIP</span>
-        <span class="brand-tag"></span>
-      </a>
-
-      <div class="nav-status">
-        <span class="status-indicator online"></span>
-        <span class="status-text">ONLINE</span>
-        <span class="status-divider">|</span>
-        <span class="location-text">KTM.NP</span>
-      </div>
-
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="nav-link" data-index="01">HOME</a></li>
-        <li><a href="#about" class="nav-link" data-index="02">ABOUT</a></li>
-        <li><a href="#projects" class="nav-link" data-index="03">WORKS</a></li>
-        <li><a href="#contact" class="nav-link" data-index="04">LINK</a></li>
-      </ul>
-
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
-        <span class="hamburger-line hamburger-top"></span>
-        <span class="hamburger-line hamburger-mid"></span>
-        <span class="hamburger-line hamburger-bot"></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero-future">
-    <div class="hero-grid-bg">
-      <div class="grid-line grid-h"></div>
-      <div class="grid-line grid-h"></div>
-      <div class="grid-line grid-h"></div>
-      <div class="grid-line grid-v"></div>
-      <div class="grid-line grid-v"></div>
-      <div class="grid-line grid-v"></div>
-    </div>
-
-    <div class="hero-content-future">
-      <div class="hero-badge-future">
-        <div class="badge-pulse"></div>
-        <span class="badge-text">READY</span>
-      </div>
-
-      <h1 class="hero-title-future">
-        <span class="title-line-future title-glitch" data-text="SUDIP_BHASIMA">SUDIP_BHASIMA</span>
-        <span class="title-line-future title-sub">FULL_STACK_ARCHITECT</span>
-        <span class="title-line-future title-location">NEPAL_EARTH_SECTOR_7</span>
-      </h1>
-
-      <p class="hero-desc-future">
-        <span class="typing-text" id="typing-text"></span>
-        <span class="typing-cursor">_</span>
-      </p>
-
-      <div class="hero-actions-future">
-        <a href="#projects" class="btn-future btn-primary-future">
-          <span class="btn-glow"></span>
-          <span class="btn-text">INITIATE_SEQUENCE</span>
-          <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+        <a href="#home" class="logo">
+            SUDIP<span>.</span>
         </a>
-        <a href="#contact" class="btn-future btn-secondary-future">
-          <span class="btn-text">ESTABLISH_LINK</span>
-        </a>
-      </div>
 
-      <div class="hero-metrics">
-        <div class="metric">
-          <div class="metric-value" data-count="4">0</div>
-          <div class="metric-label">PROJECTS_BUILT</div>
-        </div>
-        <div class="metric-separator"></div>
-        <div class="metric">
-          <div class="metric-value" data-count="3">0</div>
-          <div class="metric-label">YEARS_ACTIVE</div>
-        </div>
-        <div class="metric-separator"></div>
-        <div class="metric">
-          <div class="metric-value metric-infinite">∞</div>
-          <div class="metric-label">LEARNING_MODE</div>
-        </div>
-      </div>
-    </div>
+        <ul class="nav-links" id="navLinks">
 
-    <div class="hero-visual">
-      <div class="hologram-container">
-        <div class="hologram-ring ring-1"></div>
-        <div class="hologram-ring ring-2"></div>
-        <div class="hologram-ring ring-3"></div>
-        <div class="hologram-core">
-          <img src="sudip3.jpeg" alt="Sudip Bhasima" class="hologram-img" />
-        </div>
-        <div class="hologram-scan"></div>
-        <div class="hologram-data">
-          <div class="data-line">ID: SUDIP_B</div>
-          <div class="data-line">CLASS: DEVELOPER</div>
-          <div class="data-line">STATUS: OPERATIONAL</div>
-        </div>
-      </div>
-    </div>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
 
-    <div class="scroll-prompt">
-      <div class="scroll-line"></div>
-      <span class="scroll-text">SCROLL_TO_NAVIGATE</span>
-    </div>
-  </section>
+        </ul>
 
-  <!-- About Section -->
-  <section id="about" class="about-future">
-    <div class="section-container-future">
-      <div class="section-header-future">
-        <div class="header-line"></div>
-        <span class="section-tag-future">MODULE_01</span>
-        <h2 class="section-title-future">
-          <span class="title-bracket">[</span>
-          SYSTEM_PROFILE
-          <span class="title-bracket">]</span>
+        <button class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+                type="button">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="hero-greeting">HELLO, I'M</p>
+
+        <h1 class="hero-name">SUDIP BHASIMA</h1>
+
+        <h2 class="hero-title">
+            <span class="highlight">FULL STACK DEVELOPER</span>
         </h2>
-      </div>
 
-      <div class="about-layout">
-        <div class="about-terminal">
-          <div class="terminal-window">
+        <p class="hero-description">
+            I'm a developer from Kathmandu, Nepal, passionate about
+            building practical web applications, working with databases,
+            and turning ideas into functional digital solutions.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#projects" class="btn btn-primary">
+                View My Work
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+            <a href="#contact" class="btn btn-outline">
+                Contact Me
+            </a>
+
+        </div>
+
+        <div class="hero-location">
+            <i class="fas fa-map-marker-alt"></i>
+            Kathmandu, Nepal
+        </div>
+
+        <div class="hero-skills">
+            <span>PHP</span>
+            <span>JavaScript</span>
+            <span>HTML & CSS</span>
+            <span>MySQL</span>
+            <span>Python</span>
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img src="sudip3.jpeg"
+             alt="Sudip Bhasima - Full Stack Developer">
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT SECTION ================= -->
+
+<section class="about section" id="about">
+
+    <div class="section-heading">
+
+        <p class="section-subtitle">GET TO KNOW ME</p>
+
+        <h2>About <span>Me</span></h2>
+
+    </div>
+
+
+    <div class="about-container">
+
+        <div class="about-content">
+
+            <h3>Building Solutions Through Code</h3>
+
+            <p>
+                I'm Sudip Bhasima, a BCA graduate from Kathmandu, Nepal,
+                passionate about software development and technology.
+                I enjoy developing applications, working with databases,
+                and solving technical problems.
+            </p>
+
+            <p>
+                I have practical experience working with PHP, JavaScript,
+                HTML, CSS, and MySQL. At Neo Software, I work on software
+                development, database operations, and maintaining an
+                existing HRIS application.
+            </p>
+
+            <p>
+                I believe in continuous learning and improving my
+                technical skills by building practical projects and
+                exploring new technologies.
+            </p>
+
+
+            <div class="about-details">
+
+                <div class="detail-item">
+                    <i class="fas fa-user"></i>
+
+                    <div>
+                        <strong>Name</strong>
+                        <span>Sudip Bhasima</span>
+                    </div>
+                </div>
+
+
+                <div class="detail-item">
+                    <i class="fas fa-graduation-cap"></i>
+
+                    <div>
+                        <strong>Education</strong>
+                        <span>Bachelor of Computer Applications</span>
+                    </div>
+                </div>
+
+
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+
+                    <div>
+                        <strong>Location</strong>
+                        <span>Kathmandu, Nepal</span>
+                    </div>
+                </div>
+
+
+                <div class="detail-item">
+                    <i class="fas fa-code"></i>
+
+                    <div>
+                        <strong>Focus</strong>
+                        <span>Full Stack Development</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="about-card">
+
             <div class="terminal-header">
-              <div class="terminal-dots">
-                <span></span><span></span><span></span>
-              </div>
-              <span class="terminal-title">sudip@bhasima:~</span>
+
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+
+                <span>developer-profile.js</span>
+
             </div>
-            <div class="terminal-body" id="terminal-body">
-              <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">whoami</span>
-              </div>
-              <div class="terminal-output">sudip_bhasima — full_stack_developer</div>
-              <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">cat location.txt</span>
-              </div>
-              <div class="terminal-output">Kathmandu, Nepal // 27.7172° N, 85.3240° E</div>
-              <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">ls skills/</span>
-              </div>
-              <div class="terminal-output">
-                <span class="file-tag">html</span>
-                <span class="file-tag">css</span>
-                <span class="file-tag">js</span>
-                <span class="file-tag">php</span>
-                <span class="file-tag">mysql</span>
-                <span class="file-tag">python</span>
-              </div>
-              <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command cursor-blink">_</span>
-              </div>
+
+
+            <div class="terminal-content">
+
+                <p>
+                    <span class="code-purple">const</span>
+                    developer = {
+                </p>
+
+                <p class="indent">
+                    name:
+                    <span class="code-green">'Sudip Bhasima'</span>,
+                </p>
+
+                <p class="indent">
+                    role:
+                    <span class="code-green">'Full Stack Developer'</span>,
+                </p>
+
+                <p class="indent">
+                    location:
+                    <span class="code-green">'Nepal'</span>,
+                </p>
+
+                <p class="indent">
+                    education:
+                    <span class="code-green">'BCA'</span>,
+                </p>
+
+                <p class="indent">interests: [</p>
+
+                <p class="indent2">
+                    <span class="code-green">'Development'</span>,
+                </p>
+
+                <p class="indent2">
+                    <span class="code-green">'Databases'</span>,
+                </p>
+
+                <p class="indent2">
+                    <span class="code-green">'Technology'</span>
+                </p>
+
+                <p class="indent">],</p>
+
+                <p class="indent">
+                    learning:
+                    <span class="code-green">'Always'</span>
+                </p>
+
+                <p>};</p>
+
             </div>
-          </div>
+
         </div>
 
-        <div class="about-skills-future">
-          <h3 class="skills-header">CORE_COMPETENCIES</h3>
-
-          <div class="skill-node" data-skill="95">
-            <div class="skill-node-ring">
-              <svg viewBox="0 0 100 100">
-                <circle class="skill-track" cx="50" cy="50" r="45"/>
-                <circle class="skill-fill" cx="50" cy="50" r="45"/>
-              </svg>
-              <div class="skill-percent">95%</div>
-            </div>
-            <span class="skill-node-name">HTML/CSS</span>
-          </div>
-
-          <div class="skill-node" data-skill="88">
-            <div class="skill-node-ring">
-              <svg viewBox="0 0 100 100">
-                <circle class="skill-track" cx="50" cy="50" r="45"/>
-                <circle class="skill-fill" cx="50" cy="50" r="45"/>
-              </svg>
-              <div class="skill-percent">88%</div>
-            </div>
-            <span class="skill-node-name">JAVASCRIPT</span>
-          </div>
-
-          <div class="skill-node" data-skill="82">
-            <div class="skill-node-ring">
-              <svg viewBox="0 0 100 100">
-                <circle class="skill-track" cx="50" cy="50" r="45"/>
-                <circle class="skill-fill" cx="50" cy="50" r="45"/>
-              </svg>
-              <div class="skill-percent">82%</div>
-            </div>
-            <span class="skill-node-name">PHP/MYSQL</span>
-          </div>
-
-          <div class="skill-node" data-skill="75">
-            <div class="skill-node-ring">
-              <svg viewBox="0 0 100 100">
-                <circle class="skill-track" cx="50" cy="50" r="45"/>
-                <circle class="skill-fill" cx="50" cy="50" r="45"/>
-              </svg>
-              <div class="skill-percent">75%</div>
-            </div>
-            <span class="skill-node-name">PYTHON</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="education-matrix">
-        <h3 class="matrix-header">EDUCATION_LOG</h3>
-        <div class="matrix-grid">
-          <div class="matrix-card">
-            <div class="matrix-glow"></div>
-            <div class="matrix-year">2026</div>
-            <div class="matrix-title">BCA_DEGREE</div>
-            <div class="matrix-sub">Milton International College</div>
-            <div class="matrix-status pending">PENDING</div>
-          </div>
-          <div class="matrix-card">
-            <div class="matrix-glow"></div>
-            <div class="matrix-year">2019</div>
-            <div class="matrix-title">HIGHER_SECONDARY</div>
-            <div class="matrix-sub">Seabird International College</div>
-            <div class="matrix-status complete">COMPLETE</div>
-          </div>
-          <div class="matrix-card">
-            <div class="matrix-glow"></div>
-            <div class="matrix-year">2017</div>
-            <div class="matrix-title">SECONDARY_EDU</div>
-            <div class="matrix-sub">Prime Academy</div>
-            <div class="matrix-status complete">COMPLETE</div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-future">
-    <div class="section-container-future">
-      <div class="section-header-future">
-        <div class="header-line"></div>
-        <span class="section-tag-future">MODULE_02</span>
-        <h2 class="section-title-future">
-          <span class="title-bracket">[</span>
-          DEPLOYED_WORKS
-          <span class="title-bracket">]</span>
-        </h2>
-      </div>
+</section>
 
-      <div class="project-filters">
-        <button class="filter-btn active" data-filter="all">
-          <span class="filter-dot"></span>
-          ALL_SYSTEMS
-        </button>
-        <button class="filter-btn" data-filter="php">
-          <span class="filter-dot"></span>
-          PHP_CORE
-        </button>
-        <button class="filter-btn" data-filter="python">
-          <span class="filter-dot"></span>
-          PYTHON_UNIT
-        </button>
-        <button class="filter-btn" data-filter="frontend">
-          <span class="filter-dot"></span>
-          FRONTEND
-        </button>
-      </div>
 
-      <div class="projects-constellation" id="projects-constellation">
-        <article class="project-orb php" data-category="php">
-          <div class="orb-glow"></div>
-          <div class="orb-content">
-            <div class="orb-image">
-              <img src="BBMS/Landing_page.png" alt="Blood Bank" loading="lazy" />
-              <div class="orb-scan"></div>
-            </div>
-            <div class="orb-meta">
-              <div class="orb-tags">
-                <span class="orb-tag">PHP</span>
-                <span class="orb-tag">MYSQL</span>
-              </div>
-              <h3 class="orb-title">BLOOD_BANK_MGMT</h3>
-              <p class="orb-desc">Donor tracking & blood stock management system with admin dashboard.</p>
-              <a href="BBMS/bbms.html" class="orb-link">
-                <span>ACCESS_SYSTEM</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
+<!-- ================= SKILLS SECTION ================= -->
 
-        <article class="project-orb frontend" data-category="frontend">
-          <div class="orb-glow"></div>
-          <div class="orb-content">
-            <div class="orb-image">
-              <img src="Portfolio/landing.png" alt="Portfolio" loading="lazy" />
-              <div class="orb-scan"></div>
-            </div>
-            <div class="orb-meta">
-              <div class="orb-tags">
-                <span class="orb-tag">HTML</span>
-                <span class="orb-tag">CSS</span>
-                <span class="orb-tag">JS</span>
-              </div>
-              <h3 class="orb-title">PORTFOLIO_V2</h3>
-              <p class="orb-desc">Personal portfolio with responsive design and contact integration.</p>
-              <a href="index.html" class="orb-link">
-                <span>ACCESS_SYSTEM</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
+<section class="skills section" id="skills">
 
-        <article class="project-orb php" data-category="php">
-          <div class="orb-glow"></div>
-          <div class="orb-content">
-            <div class="orb-image">
-              <img src="images/pharmacy.png" alt="Pharmacy" loading="lazy" />
-              <div class="orb-scan"></div>
-            </div>
-            <div class="orb-meta">
-              <div class="orb-tags">
-                <span class="orb-tag">PHP</span>
-                <span class="orb-tag">MYSQL</span>
-              </div>
-              <h3 class="orb-title">PHARMA_NET</h3>
-              <p class="orb-desc">Online pharmacy with user & admin control panels.</p>
-              <a href="pharmacy.html" class="orb-link">
-                <span>ACCESS_SYSTEM</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
+    <div class="section-heading">
 
-        <article class="project-orb python" data-category="python">
-          <div class="orb-glow"></div>
-          <div class="orb-content">
-            <div class="orb-image">
-              <img src="python/calculator.png" alt="Python" loading="lazy" />
-              <div class="orb-scan"></div>
-            </div>
-            <div class="orb-meta">
-              <div class="orb-tags">
-                <span class="orb-tag">PYTHON</span>
-                <span class="orb-tag">CLI</span>
-              </div>
-              <h3 class="orb-title">TERMINAL_OPS</h3>
-              <p class="orb-desc">Command-line tools: calculator, password gen, todo manager.</p>
-              <a href="python/BeginnerProjects.html" class="orb-link">
-                <span>ACCESS_SYSTEM</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
+        <p class="section-subtitle">WHAT I WORK WITH</p>
+
+        <h2>Technical <span>Skills</span></h2>
+
+        <p>
+            Technologies and tools I have worked with or am currently learning.
+        </p>
+
     </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact-future">
-    <div class="section-container-future">
-      <div class="section-header-future">
-        <div class="header-line"></div>
-        <span class="section-tag-future">MODULE_03</span>
-        <h2 class="section-title-future">
-          <span class="title-bracket">[</span>
-          TRANSMISSION_LINK
-          <span class="title-bracket">]</span>
-        </h2>
-      </div>
 
-      <div class="contact-interface">
-        <div class="interface-panel">
-          <div class="panel-header">
-            <span class="panel-id">COMMS_01</span>
-            <div class="panel-signal">
-              <span class="signal-bar"></span>
-              <span class="signal-bar"></span>
-              <span class="signal-bar"></span>
-              <span class="signal-bar"></span>
+    <div class="skills-container">
+
+        <div class="skill-card">
+
+            <i class="fas fa-code"></i>
+
+            <h3>Frontend Development</h3>
+
+            <div class="skill-tags">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
             </div>
-          </div>
 
-          <div class="contact-channels">
-            <a href="mailto:bhasimasudeep05@gmail.com" class="channel">
-              <div class="channel-icon">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-              <div class="channel-data">
-                <span class="channel-label">EMAIL_CHANNEL</span>
-                <span class="channel-value">bhasimasudeep05@gmail.com</span>
-              </div>
-              <div class="channel-status active">ACTIVE</div>
-            </a>
-
-            <a href="tel:+9779866443370" class="channel">
-              <div class="channel-icon">
-                <i class="fa-solid fa-signal"></i>
-              </div>
-              <div class="channel-data">
-                <span class="channel-label">VOICE_CHANNEL</span>
-                <span class="channel-value">+977_9866443370</span>
-              </div>
-              <div class="channel-status active">ACTIVE</div>
-            </a>
-
-            <div class="channel">
-              <div class="channel-icon">
-                <i class="fa-solid fa-location-crosshairs"></i>
-              </div>
-              <div class="channel-data">
-                <span class="channel-label">COORDINATES</span>
-                <span class="channel-value">Kathmandu_Nepal</span>
-              </div>
-              <div class="channel-status">FIXED</div>
-            </div>
-          </div>
-
-          <div class="social-matrix">
-            <a href="https://facebook.com/TheKing.Sudip/" target="_blank" class="social-node" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-              <span class="node-label">FB</span>
-            </a>
-            <a href="https://instagram.com/sudipbhasima/" target="_blank" class="social-node" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-              <span class="node-label">IG</span>
-            </a>
-            <a href="https://linkedin.com/in/sudipbhasima/" target="_blank" class="social-node" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-              <span class="node-label">LI</span>
-            </a>
-            <a href="https://github.com/sudip14" target="_blank" class="social-node" aria-label="GitHub">
-              <i class="fa-brands fa-github"></i>
-              <span class="node-label">GH</span>
-            </a>
-          </div>
         </div>
 
-        <div class="transmission-form">
-          <div class="form-header">
-            <span class="form-id">TX_FORM_01</span>
-            <div class="form-encrypt">
-              <i class="fa-solid fa-lock"></i>
-              <span>ENCRYPTED</span>
-            </div>
-          </div>
 
-          <form id="contact-form-future" novalidate>
-            <div class="input-field">
-              <input type="text" id="tx-name" name="name" placeholder=" " required />
-              <label for="tx-name">OPERATOR_ID</label>
-              <div class="input-line"></div>
-              <div class="input-glow"></div>
+        <div class="skill-card">
+
+            <i class="fas fa-server"></i>
+
+            <h3>Backend Development</h3>
+
+            <div class="skill-tags">
+                <span>Core PHP</span>
+                <span>CRUD Operations</span>
+                <span>API Basics</span>
             </div>
 
-            <div class="input-field">
-              <input type="email" id="tx-email" name="email" placeholder=" " required />
-              <label for="tx-email">COMM_ADDRESS</label>
-              <div class="input-line"></div>
-              <div class="input-glow"></div>
+        </div>
+
+
+        <div class="skill-card">
+
+            <i class="fas fa-database"></i>
+
+            <h3>Database Management</h3>
+
+            <div class="skill-tags">
+                <span>MySQL</span>
+                <span>Oracle SQL</span>
+                <span>phpMyAdmin</span>
             </div>
 
-            <div class="input-field">
-              <textarea id="tx-message" name="message" rows="4" placeholder=" " required></textarea>
-              <label for="tx-message">TRANSMISSION_DATA</label>
-              <div class="input-line"></div>
-              <div class="input-glow"></div>
+        </div>
+
+
+        <div class="skill-card">
+
+            <i class="fas fa-tools"></i>
+
+            <h3>Tools & Technologies</h3>
+
+            <div class="skill-tags">
+                <span>Git</span>
+                <span>GitHub</span>
+                <span>VS Code</span>
+                <span>XAMPP</span>
             </div>
 
-            <button type="submit" class="transmit-btn">
-              <div class="btn-pulse"></div>
-              <span class="transmit-text">TRANSMIT_SIGNAL</span>
-              <span class="transmit-loading" hidden>
-                <svg class="transmit-spinner" width="16" height="16" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
-                </svg>
-                ENCODING...
-              </span>
+        </div>
+
+
+        <div class="skill-card">
+
+            <i class="fab fa-python"></i>
+
+            <h3>Programming</h3>
+
+            <div class="skill-tags">
+                <span>Python Basics</span>
+                <span>Problem Solving</span>
+            </div>
+
+        </div>
+
+
+        <div class="skill-card">
+
+            <i class="fas fa-book-open"></i>
+
+            <h3>Currently Learning</h3>
+
+            <div class="skill-tags">
+                <span>React</span>
+                <span>Python</span>
+                <span>AI / ML Basics</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EXPERIENCE SECTION ================= -->
+
+<section id="experience" class="experience section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">MY JOURNEY</span>
+
+            <h2>Professional <span>Experience</span></h2>
+
+            <p>My professional growth and industry experience.</p>
+
+        </div>
+
+
+        <div class="company-card">
+
+            <div class="company-header">
+
+                <div class="experience-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+
+                <div>
+                    <h3>Neo Software Pvt. Ltd.</h3>
+                    <span>Software Development</span>
+                </div>
+
+            </div>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <span class="experience-status">
+                        CURRENT POSITION
+                    </span>
+
+                    <h4>Developer</h4>
+
+                    <p class="timeline-date">Present</p>
+
+                    <ul>
+                        <li>Developing and maintaining software applications using PHP.</li>
+                        <li>Working with Oracle SQL and database operations.</li>
+                        <li>Implementing CRUD operations and backend functionality.</li>
+                        <li>Debugging issues and maintaining existing application features.</li>
+                        <li>Contributing to ongoing software development projects.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <span class="experience-status completed">
+                        PREVIOUS POSITION
+                    </span>
+
+                    <h4>PHP Developer Intern</h4>
+
+                    <p class="timeline-date">Internship – Completed</p>
+
+                    <ul>
+                        <li>Gained practical experience in PHP development.</li>
+                        <li>Learned database operations and Oracle SQL.</li>
+                        <li>Worked on CRUD functionality and backend development.</li>
+                        <li>Learned professional software development workflows.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECTS SECTION ================= -->
+
+<section id="projects" class="projects section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-tag">MY WORK</span>
+
+            <h2>Featured <span>Projects</span></h2>
+
+            <p>Some projects I have worked on.</p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <!-- PROJECT 1: BLOOD BANK -->
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    <img src="images/blood-bank.png"
+                         alt="Blood Bank Management System">
+
+                    <div class="project-overlay">
+
+                        <a href="BBMS/bbms.html">
+                            <i class="fas fa-eye"></i>
+                            View Project
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        Web Application
+                    </span>
+
+                    <h3>Blood Bank Management System</h3>
+
+                    <p>
+                        A web-based system for managing blood donors,
+                        blood stock, and blood requests with an
+                        administrative dashboard.
+                    </p>
+
+
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                    </div>
+
+
+                    <div class="project-links">
+
+                        <a href="projects/blood-bank/index.html">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                        </a>
+
+                        <a href="https://github.com/Sudip14/blood-bank-management-system"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fab fa-github"></i>
+                            GitHub
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT 2: PORTFOLIO -->
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    <img src="images/portfolio.png"
+                         alt="Personal Developer Portfolio">
+
+                    <div class="project-overlay">
+
+                        <a href="https://sudipbhasima.com.np/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        Personal Website
+                    </span>
+
+                    <h3>Developer Portfolio</h3>
+
+                    <p>
+                        A personal portfolio website showcasing my
+                        skills, professional experience, projects,
+                        and contact information.
+                    </p>
+
+
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+
+
+                    <div class="project-links">
+
+                        <a href="https://sudipbhasima.com.np/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Website
+
+                        </a>
+
+                        <a href="https://github.com/sudip14"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fab fa-github"></i>
+                            GitHub
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT 3: ONLINE PHARMACY -->
+
+            <div class="project-card">
+
+                <div class="project-image">
+
+                    <img src="images/pharmacy.png"
+                         alt="Online Pharmacy Management System">
+
+                    <div class="project-overlay">
+
+                        <a href="https://github.com/sudip14"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fab fa-github"></i>
+                            GitHub Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        Web Application
+                    </span>
+
+                    <h3>Online Pharmacy Management</h3>
+
+                    <p>
+                        A pharmacy management project concept focused
+                        on managing medicines, products, and
+                        pharmacy-related information.
+                    </p>
+
+
+                    <div class="project-tech">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/sudip14"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fab fa-github"></i>
+                            GitHub Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EDUCATION SECTION ================= -->
+
+<section class="education section" id="education">
+
+    <div class="section-heading">
+
+        <p class="section-subtitle">MY ACADEMIC BACKGROUND</p>
+
+        <h2>My <span>Education</span></h2>
+
+    </div>
+
+
+    <div class="education-container">
+
+
+        <div class="education-card">
+
+            <i class="fas fa-graduation-cap"></i>
+
+            <div>
+
+                <span class="education-date">2026</span>
+
+                <h3>Bachelor of Computer Applications (BCA)</h3>
+
+                <h4>Milton International College</h4>
+
+                <p>Kathmandu, Nepal</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="education-card">
+
+            <i class="fas fa-school"></i>
+
+            <div>
+
+                <span class="education-date">2021</span>
+
+                <h3>Higher Secondary Education</h3>
+
+                <h4>Seabird International College</h4>
+
+                <p>Management Faculty</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="education-card">
+
+            <i class="fas fa-book"></i>
+
+            <div>
+
+                <span class="education-date">2019</span>
+
+                <h3>Secondary Education</h3>
+
+                <h4>Prime Academy</h4>
+
+                <p>Bhaktapur, Nepal</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT SECTION ================= -->
+
+<section class="contact section" id="contact">
+
+    <div class="section-heading">
+
+        <p class="section-subtitle">LET'S CONNECT</p>
+
+        <h2>Contact <span>Me</span></h2>
+
+        <p>
+            Have a project idea, opportunity, or question?
+            Feel free to get in touch.
+        </p>
+
+    </div>
+
+
+    <div class="contact-container">
+
+
+        <div class="contact-info">
+
+
+            <div class="contact-item">
+
+                <i class="fas fa-envelope"></i>
+
+                <div>
+
+                    <h3>Email</h3>
+
+                    <a href="mailto:bhasimasudeep@gmail.com">
+                        bhasimasudeep@gmail.com
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <i class="fas fa-phone"></i>
+
+                <div>
+
+                    <h3>Phone</h3>
+
+                    <a href="tel:+9779866443370">
+                        +977 9866443370
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <i class="fas fa-map-marker-alt"></i>
+
+                <div>
+
+                    <h3>Location</h3>
+
+                    <p>Kathmandu, Nepal</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="social-links">
+
+                <a href="https://github.com/sudip14"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">
+
+                    <i class="fab fa-github"></i>
+
+                </a>
+
+
+                <a href="https://www.linkedin.com/in/sudip-bhasima-47183b305/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+
+                    <i class="fab fa-linkedin-in"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTACT FORM -->
+
+        <form class="contact-form" id="contactForm">
+
+            <div class="form-group">
+
+                <input type="text"
+                       id="name"
+                       name="name"
+                       placeholder="Your Name"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="Your Email"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <input type="text"
+                       id="subject"
+                       name="subject"
+                       placeholder="Subject"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <textarea id="message"
+                          name="message"
+                          rows="6"
+                          placeholder="Your Message"
+                          required></textarea>
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">
+
+                Send Message
+                <i class="fas fa-paper-plane"></i>
+
             </button>
-          </form>
-        </div>
-      </div>
+
+
+            <p id="formStatus" aria-live="polite"></p>
+
+        </form>
+
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer-future">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="brand-icon">◈</span>
-        <span>SUDIP</span>
-      </div>
-      <div class="footer-coords">
-        <span>27.7172°N</span>
-        <span class="coord-divider">×</span>
-        <span>85.3240°E</span>
-      </div>
-      <div class="footer-copy">
-        <span id="footer-year">2024</span>
-        <span class="copy-divider">//</span>
-        <span>ALL_SYSTEMS_NOMINAL</span>
-      </div>
-    </div>
-    <div class="footer-scan"></div>
-  </footer>
+</section>
 
-  <button class="warp-home" id="warp-home" aria-label="Return to top">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M12 19V5M5 12l7-7 7 7"/>
-    </svg>
-  </button>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="script.js"></script>
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <a href="#home" class="footer-logo">
+        SUDIP<span>.</span>
+    </a>
+
+    <p>
+        Designed and developed by Sudip Bhasima.
+    </p>
+
+    <p class="copyright">
+
+        &copy; <span id="currentYear"></span>
+        Sudip Bhasima. All rights reserved.
+
+    </p>
+
+
+    <a href="#home"
+       class="back-to-top"
+       aria-label="Back to top">
+
+        <i class="fas fa-arrow-up"></i>
+
+    </a>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
 </body>
 </html>
