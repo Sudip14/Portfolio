@@ -891,7 +891,7 @@
 
         <!-- CONTACT FORM -->
 
-        <form class="contact-form" id="contactForm" action="send_mail.php" method="POST">
+        <form class="contact-form" id="contactForm">
 
             <div class="form-group">
 
@@ -944,9 +944,7 @@
 
             </button>
 
-
-            <p id="formStatus" aria-live="polite"></p>
-
+            <p id="formStatus" aria-live="polite" role="status"></p>
         </form>
 
     </div>
@@ -987,6 +985,7 @@
 
 <!-- ================= JAVASCRIPT ================= -->
 
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script src="script.js"></script>
 
 </body>

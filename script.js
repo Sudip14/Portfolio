@@ -229,26 +229,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =====================================
-    // 9. CONTACT FORM BASIC VALIDATION
+    // 9. CONTACT FORM
     // =====================================
 
     const contactForm = document.getElementById("contactForm");
 
     if (contactForm) {
+        const formStatus = document.getElementById("formStatus");
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const emailService = window.emailjs;
+        let emailServiceReady = Boolean(emailService);
 
-        contactForm.addEventListener("submit", function (event) {
+        if (emailServiceReady) {
+            try {
+                emailService.init("QdlqQtJQWOfHJmWIq");
+            } catch (error) {
+                console.error("EmailJS initialization failed:", error);
+                emailServiceReady = false;
+            }
+        }
 
-            const name = contactForm.querySelector('[name="name"]');
-            const email = contactForm.querySelector('[name="email"]');
-            const message = contactForm.querySelector('[name="message"]');
+        contactForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-            if (
-                (name && !name.value.trim()) ||
-                (email && !email.value.trim()) ||
-                (message && !message.value.trim())
-            ) {
-                event.preventDefault();
-                alert("Please fill in all required fields.");
+            if (!emailServiceReady) {
+                formStatus.textContent = "Email service is unavailable. Please email bhasimasudeep@gmail.com directly.";
+                return;
+            }
+
+            submitButton.disabled = true;
+            formStatus.textContent = "Sending your message...";
+
+            try {
+                await emailService.sendForm(
+                    "service_yvzbmub",
+                    "template_048g9pv",
+                    contactForm
+                );
+                formStatus.textContent = "Your message has been sent successfully.";
+                contactForm.reset();
+            } catch (error) {
+                console.error("EmailJS contact form submission failed:", error);
+                formStatus.textContent = "Your message could not be sent. Please email bhasimasudeep@gmail.com directly.";
+            } finally {
+                submitButton.disabled = false;
             }
         });
     }
