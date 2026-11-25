@@ -336,6 +336,7 @@ section {
     box-shadow: 0 0 35px rgba(0, 229, 255, 0.2);
     position: relative;
     z-index: 1;
+    transform: rotate(40deg);
 }
 
 @keyframes rotateBorder {
