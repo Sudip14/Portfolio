@@ -118,6 +118,14 @@ section {
     color: var(--primary);
 }
 
+.logo img,
+.footer-logo img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
