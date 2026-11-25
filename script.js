@@ -270,7 +270,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 contactForm.reset();
             } catch (error) {
                 console.error("EmailJS contact form submission failed:", error);
-                formStatus.textContent = "Your message could not be sent. Please email bhasimasudeep@gmail.com directly.";
+                const errorStatus = error && error.status ? " (EmailJS " + error.status + ")" : "";
+                const errorDetail = error && error.text
+                    ? " " + error.text
+                    : " Check the EmailJS service, template, and allowed domain settings.";
+                formStatus.textContent = "Your message could not be sent" + errorStatus + "." + errorDetail + " Please email bhasimasudeep@gmail.com directly.";
             } finally {
                 submitButton.disabled = false;
             }
